@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20Burnable.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20Pausable.sol";
 
-contract SongFToken is Context, AccessControl, ERC20Burnable, ERC20Pausable {
+contract OurCoin is Context, AccessControl, ERC20Burnable, ERC20Pausable {
   bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
 
   constructor(string memory name_, string memory symbol_, uint256 initialSupply_, uint8 decimals_) public ERC20(name_, symbol_) {
