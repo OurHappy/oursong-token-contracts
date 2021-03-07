@@ -1,9 +1,11 @@
+var SSTAdminContract = artifacts.require("SSTAdminContract");
 var OurCoin = artifacts.require("OurCoin");
-var SongFToken = artifacts.require("SongFToken");
-var SongNFToken = artifacts.require("SongNFToken");
+var OurSongFToken = artifacts.require("OurSongFToken");
+var OurSongNFToken = artifacts.require("OurSongNFToken");
 
 module.exports = function (deployer) {
+    deployer.deploy(SSTAdminContract);
     deployer.deploy(OurCoin, 'OurCoin', 'OUR', 777777777, 18);
-    deployer.deploy(SongFToken, 'SongFToken', 'SFT', 1000, 0);
-    deployer.deploy(SongNFToken, 'SongNFToken', 'SNFT', 3, 'https://www.oursong.com/s/custom_id/token/');
+    deployer.deploy(OurSongFToken, 'OurSongFToken', 'OSFT', 1000, 0, '0x47ac3b44ec854bc513ff99fb8aac7738fa52acd7');
+    deployer.deploy(OurSongNFToken, 'OurSongNFToken', 'OSNFT', 3, 'https://www.oursong.com/s/custom_id/token/');
 };

@@ -1,23 +1,17 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.22 <0.9.0;
 
-import "@openzeppelin/contracts/access/AccessControl.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Context.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20Burnable.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20Pausable.sol";
 
-contract OurSongFToken is Context, AccessControl, ERC20Burnable, ERC20Pausable {
-  bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
-  bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
-
-  constructor(string memory name_, string memory symbol_, uint256 initialSupply_, uint8 decimals_) public ERC20(name_, symbol_) {
-    _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
-    _setupRole(MINTER_ROLE, _msgSender());
-    _setupRole(PAUSER_ROLE, _msgSender());
-
+contract OurSongFToken is Context, Ownable, ERC20Burnable, ERC20Pausable {
+  constructor(string memory name_, string memory symbol_, uint256 initialSupply_, uint8 decimals_, address owner_) public ERC20(name_, symbol_) {
     _setupDecimals(decimals_);
     _mint(_msgSender(), initialSupply_);
+    transferOwnership(owner_);
   }
 
   /**
@@ -29,8 +23,7 @@ contract OurSongFToken is Context, AccessControl, ERC20Burnable, ERC20Pausable {
     *
     * - the caller must have the `MINTER_ROLE`.
     */
-  function mint(address to, uint256 amount) public virtual {
-    require(hasRole(MINTER_ROLE, _msgSender()), "OurSongFToken: must have minter role to mint");
+  function mint(address to, uint256 amount) public virtual onlyOwner {
     _mint(to, amount);
   }
 
@@ -43,8 +36,7 @@ contract OurSongFToken is Context, AccessControl, ERC20Burnable, ERC20Pausable {
     *
     * - the caller must have the `PAUSER_ROLE`.
     */
-  function pause() public virtual {
-    require(hasRole(PAUSER_ROLE, _msgSender()), "OurSongFToken: must have pauser role to pause");
+  function pause() public virtual onlyOwner {
     _pause();
   }
 
@@ -57,8 +49,7 @@ contract OurSongFToken is Context, AccessControl, ERC20Burnable, ERC20Pausable {
     *
     * - the caller must have the `PAUSER_ROLE`.
     */
-  function unpause() public virtual {
-    require(hasRole(PAUSER_ROLE, _msgSender()), "OurSongFToken: must have pauser role to unpause");
+  function unpause() public virtual onlyOwner {
     _unpause();
   }
 
