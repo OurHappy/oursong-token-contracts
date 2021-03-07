@@ -8,29 +8,29 @@ contract('SSTAdminContract', function (accounts) {
         sstAdmin = await SSTAdminContract.new({ from: accounts[0] });
     });
 
-    it('should be true', function () {
+    it('should be true', async () => {
         let delegate = web3.eth.abi.encodeFunctionSignature({
             "constant": false,
             "inputs": [
-            {
-                "name": "sender",
-                "type": "address"
-            },
-            {
-                "name": "receiver",
-                "type": "address"
-            },
-            {
-                "name": "value",
-                "type": "uint256"
-            }
+                {
+                    "name": "sender",
+                    "type": "address"
+                },
+                {
+                    "name": "receiver",
+                    "type": "address"
+                },
+                {
+                    "name": "value",
+                    "type": "uint256"
+                }
             ],
             "name": "delegateTransfer",
             "outputs": [
-            {
-                "name": "",
-                "type": "bool"
-            }
+                {
+                    "name": "",
+                    "type": "bool"
+                }
             ],
             "payable": false,
             "stateMutability": "nonpayable",
