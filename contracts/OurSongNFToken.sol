@@ -9,7 +9,7 @@ import "@openzeppelin/contracts/token/ERC721/ERC721Burnable.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721Pausable.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 
-contract SongNFToken is Context, AccessControl, ERC721Burnable, ERC721Pausable {
+contract OurSongNFToken is Context, AccessControl, ERC721Burnable, ERC721Pausable {
   using SafeMath for uint256;
 
   bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
@@ -51,7 +51,7 @@ contract SongNFToken is Context, AccessControl, ERC721Burnable, ERC721Pausable {
     * - the caller must have the `MINTER_ROLE`.
     */
   function mint(address to_, uint256 tokenId_) public virtual {
-    require(hasRole(MINTER_ROLE, _msgSender()), "SongNFToken: must have minter role to mint");
+    require(hasRole(MINTER_ROLE, _msgSender()), "OurSongNFToken: must have minter role to mint");
 
     // We cannot just use balanceOf to create the new tokenId because tokens
     // can be burned (destroyed), so we need a separate counter.
@@ -68,7 +68,7 @@ contract SongNFToken is Context, AccessControl, ERC721Burnable, ERC721Pausable {
     * - the caller must have the `PAUSER_ROLE`.
     */
   function pause() public virtual {
-    require(hasRole(PAUSER_ROLE, _msgSender()), "SongNFToken: must have pauser role to pause");
+    require(hasRole(PAUSER_ROLE, _msgSender()), "OurSongNFToken: must have pauser role to pause");
     _pause();
   }
 
@@ -82,7 +82,7 @@ contract SongNFToken is Context, AccessControl, ERC721Burnable, ERC721Pausable {
     * - the caller must have the `PAUSER_ROLE`.
     */
   function unpause() public virtual {
-    require(hasRole(PAUSER_ROLE, _msgSender()), "SongNFToken: must have pauser role to unpause");
+    require(hasRole(PAUSER_ROLE, _msgSender()), "OurSongNFToken: must have pauser role to unpause");
     _unpause();
   }
 
