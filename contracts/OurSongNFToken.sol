@@ -1,31 +1,23 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.22 <0.9.0;
 
-import "@openzeppelin/contracts/access/AccessControl.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Context.sol";
-import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721Burnable.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721Pausable.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 
-contract OurSongNFToken is Context, AccessControl, ERC721Burnable, ERC721Pausable {
+contract OurSongNFToken is Context, Ownable, ERC721Burnable, ERC721Pausable {
   using SafeMath for uint256;
-
-  bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
-  bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
 
   uint256 private _totalSupply;
 
-  constructor(string memory name_, string memory symbol_, uint256 initialSupply_, string memory baseURI_) public ERC721(name_, symbol_) {
-    _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
-
-    _setupRole(MINTER_ROLE, _msgSender());
-    _setupRole(PAUSER_ROLE, _msgSender());
-
-    _setBaseURI(baseURI_);
-
+  constructor(string memory name_, string memory symbol_, uint256 initialSupply_, string memory baseURI_, address owner_) public ERC721(name_, symbol_) {
+    setBaseURI(baseURI_);
     addTotalSupply(initialSupply_);
+
+    transferOwnership(owner_);
   }
 
   /**
@@ -35,8 +27,12 @@ contract OurSongNFToken is Context, AccessControl, ERC721Burnable, ERC721Pausabl
     return _totalSupply;
   }
 
-  function addTotalSupply(uint256 amount_) internal virtual {
+  function addTotalSupply(uint256 amount_) public virtual onlyOwner {
     _totalSupply = _totalSupply.add(amount_);
+  }
+
+  function setBaseURI(string memory baseURI_) public virtual onlyOwner {
+    _setBaseURI(baseURI_);
   }
 
   /**
@@ -50,9 +46,7 @@ contract OurSongNFToken is Context, AccessControl, ERC721Burnable, ERC721Pausabl
     *
     * - the caller must have the `MINTER_ROLE`.
     */
-  function mint(address to_, uint256 tokenId_) public virtual {
-    require(hasRole(MINTER_ROLE, _msgSender()), "OurSongNFToken: must have minter role to mint");
-
+  function mint(address to_, uint256 tokenId_) public virtual onlyOwner {
     // We cannot just use balanceOf to create the new tokenId because tokens
     // can be burned (destroyed), so we need a separate counter.
     _mint(to_, tokenId_);
@@ -67,8 +61,7 @@ contract OurSongNFToken is Context, AccessControl, ERC721Burnable, ERC721Pausabl
     *
     * - the caller must have the `PAUSER_ROLE`.
     */
-  function pause() public virtual {
-    require(hasRole(PAUSER_ROLE, _msgSender()), "OurSongNFToken: must have pauser role to pause");
+  function pause() public virtual onlyOwner {
     _pause();
   }
 
@@ -81,8 +74,7 @@ contract OurSongNFToken is Context, AccessControl, ERC721Burnable, ERC721Pausabl
     *
     * - the caller must have the `PAUSER_ROLE`.
     */
-  function unpause() public virtual {
-    require(hasRole(PAUSER_ROLE, _msgSender()), "OurSongNFToken: must have pauser role to unpause");
+  function unpause() public virtual onlyOwner {
     _unpause();
   }
 
