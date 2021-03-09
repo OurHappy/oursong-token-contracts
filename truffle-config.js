@@ -24,6 +24,9 @@
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 
+const { infuraProjectId, mnemonic, etherscanApiKey } = require('./secrets.json');
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+
 module.exports = {
   /**
    * Networks define how you connect to your ethereum client and let you set the
@@ -72,6 +75,12 @@ module.exports = {
     // network_id: 2111,   // This network is yours, in the cloud.
     // production: true    // Treats this network as if it was a public net. (default: false)
     // }
+    ropsten: {
+      provider: function() {
+        return new HDWalletProvider(mnemonic, `https://ropsten.infura.io/v3/${infuraProjectId}`)
+      },
+      network_id: 3
+    },
     development: {
       host: "localhost",
       port: 8545,
@@ -107,5 +116,13 @@ module.exports = {
 
   db: {
     enabled: false
+  },
+
+  plugins: [
+    'truffle-plugin-verify'
+  ],
+
+  api_keys: {
+    etherscan: etherscanApiKey
   }
 };
