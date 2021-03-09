@@ -1,33 +1,140 @@
-var OurCoin = artifacts.require('OurCoin');
+const { BN, constants, expectEvent, expectRevert } = require('@openzeppelin/test-helpers');
+const { expect } = require('chai');
+
+const OurCoin = artifacts.require('OurCoin');
 
 contract('OurCoin', function (accounts) {
+    const [ initialHolder, recipient, anotherAccount ] = accounts;
 
-    const INITIAL_SUPPLY = 777777777000000000000000000;
-    const AMOUNT = 123;
+    const TOKEN_NAME = 'OurCoin';
+    const TOKEN_SYMBOL = 'OUR';
+    const TOKEN_DECIMAL = new BN(18);
+    const INITIAL_SUPPLY = new BN(777777777);
+    const TRANSFER_AMOUNT = new BN(123);
+    const BURN_AMOUNT = new BN(456);
 
-    it('should met initial supply', async () => {
-        let contract = await OurCoin.deployed('OurCoin', 'OUR', 18, INITIAL_SUPPLY);
-        // check init balance
-        let account0Balance = await contract.balanceOf(accounts[0]);
-        let totalSupply = await contract.totalSupply.call();
-        assert.equal(account0Balance.toNumber(), totalSupply.toNumber());
+    const DEFAULT_ADMIN_ROLE = "0x0000000000000000000000000000000000000000000000000000000000000000";
+    const PAUSER_ROLE = web3.utils.keccak256("PAUSER_ROLE");
+
+    beforeEach(async function () {
+        this.token = await OurCoin.new(TOKEN_NAME, TOKEN_SYMBOL, INITIAL_SUPPLY);
     });
 
-    it('should have right balance after transfer', async function () {
-        let contract = await OurCoin.deployed('OurCoin', 'OUR', 18, INITIAL_SUPPLY);
-        // check init balance
-        let account0Balance = await contract.balanceOf(accounts[0]);
-        let account1Balance = await contract.balanceOf(accounts[1]);
-        let totalSupply = await contract.totalSupply.call();
-        assert.equal(account0Balance.toNumber(), totalSupply.toNumber());
-        assert.equal(account1Balance.toNumber(), 0);
-        // check balance after transferred
-        await contract.transfer(accounts[1], AMOUNT, { from: accounts[0] });
-        account0Balance = await contract.balanceOf(accounts[0]);
-        account1Balance = await contract.balanceOf(accounts[1]);
-        console.log(account0Balance.toNumber());
-        console.log(account1Balance.toNumber());
-        assert.equal(account0Balance.toNumber(), totalSupply.toNumber() - AMOUNT);
-        assert.equal(account1Balance.toNumber(), AMOUNT);
+    describe('should met initial settings', async () => {
+
+        it('has a name', async function () {
+            expect(await this.token.name()).to.equal(TOKEN_NAME);
+        });
+
+        it('has a symbol', async function () {
+            expect(await this.token.symbol()).to.equal(TOKEN_SYMBOL);
+        });
+
+        it('has 18 decimals', async function () {
+            expect(await this.token.decimals()).to.be.bignumber.equal(TOKEN_DECIMAL);
+        });
+
+        it('met initial supply with total supply', async function () {
+            expect(await this.token.totalSupply()).to.be.bignumber.equal(INITIAL_SUPPLY);
+        });
+
+        it('met initial supply with init balance', async function () {
+            expect(await this.token.balanceOf(initialHolder)).to.be.bignumber.equal(INITIAL_SUPPLY);
+        });
+    });
+
+    describe('should have right balance after transfer', async function () {
+
+        it('met initial balance', async function () {
+            let initialHolderBalance = await this.token.balanceOf(initialHolder);
+            let recipientBalance = await this.token.balanceOf(recipient);
+
+            expect(initialHolderBalance).to.be.bignumber.equal(INITIAL_SUPPLY);
+            expect(recipientBalance).to.be.bignumber.equal(new BN(0));
+        });
+
+        it('met balance after transferred', async function () {
+            await this.token.transfer(recipient, TRANSFER_AMOUNT, { from: initialHolder });
+
+            let initialHolderBalance = await this.token.balanceOf(initialHolder);
+            let recipientBalance = await this.token.balanceOf(recipient);
+
+            expect(initialHolderBalance).to.be.bignumber.equal(INITIAL_SUPPLY.sub(TRANSFER_AMOUNT));
+            expect(recipientBalance).to.be.bignumber.equal(TRANSFER_AMOUNT);
+        });
+    });
+
+    describe('should have right balance after burn', async function () {
+
+        it('met initial balance', async function () {
+            expect(await this.token.totalSupply()).to.be.bignumber.equal(INITIAL_SUPPLY);
+            expect(await this.token.balanceOf(initialHolder)).to.be.bignumber.equal(INITIAL_SUPPLY);
+        });
+
+        it('met balance after burned', async function () {
+            await this.token.burn(BURN_AMOUNT, { from: initialHolder });
+
+            await expectRevert(
+              this.token.burn(BURN_AMOUNT, { from: anotherAccount }),
+              'ERC20: burn amount exceeds balance',
+            );
+
+            expect(await this.token.totalSupply()).to.be.bignumber.equal(INITIAL_SUPPLY.sub(BURN_AMOUNT));
+            expect(await this.token.balanceOf(initialHolder)).to.be.bignumber.equal(INITIAL_SUPPLY.sub(BURN_AMOUNT));
+        });
+    });
+
+    describe('should have pause/unpause function', async function () {
+        it('met initial admin/pauser is initial holder', async function () {
+            expect(await this.token.hasRole(DEFAULT_ADMIN_ROLE, initialHolder)).equal(true);
+            expect(await this.token.hasRole(PAUSER_ROLE, initialHolder)).equal(true);
+        });
+
+        it('can pause/unpause by pauser', async function () {
+            expect(await this.token.paused()).equal(false);
+
+            await this.token.pause({ from: initialHolder });
+
+            expect(await this.token.paused()).equal(true);
+
+            await this.token.unpause({ from: initialHolder });
+
+            expect(await this.token.paused()).equal(false);
+        });
+
+        it('can not pause/unpause by not pauser', async function () {
+            expect(await this.token.paused()).equal(false);
+
+            await expectRevert(
+              this.token.pause({ from: anotherAccount }),
+              'OurCoin: must have pauser role to pause',
+            );
+
+            expect(await this.token.paused()).equal(false);
+
+            await expectRevert(
+              this.token.unpause({ from: anotherAccount }),
+              'OurCoin: must have pauser role to unpause',
+            );
+        });
+
+        it('can add pauser', async function () {
+            expect(await this.token.hasRole(PAUSER_ROLE, anotherAccount)).equal(false);
+
+            await expectRevert(
+              this.token.pause({ from: anotherAccount }),
+              'OurCoin: must have pauser role to pause',
+            );
+
+            await this.token.grantRole(PAUSER_ROLE, anotherAccount, { from: initialHolder });
+
+            expect(await this.token.hasRole(PAUSER_ROLE, anotherAccount)).equal(true);
+
+            expect(await this.token.paused()).equal(false);
+
+            await this.token.pause({ from: initialHolder });
+
+            expect(await this.token.paused()).equal(true);
+        });
     });
 });
