@@ -125,7 +125,8 @@ module.exports = {
   },
 
   plugins: [
-    'truffle-plugin-verify'
+    'truffle-plugin-verify',
+    'solidity-coverage'
   ],
 
   api_keys: {

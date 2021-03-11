@@ -1,4 +1,6 @@
 /build
 /node_modules
 /contracts/artifacts
+/coverage
 secrets.json
+coverage.json

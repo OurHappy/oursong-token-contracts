@@ -49,6 +49,9 @@ contract OurSongNFToken is Context, Ownable, ERC721Burnable, ERC721Pausable {
   function mint(address to_, uint256 tokenId_) public virtual onlyOwner {
     // We cannot just use balanceOf to create the new tokenId because tokens
     // can be burned (destroyed), so we need a separate counter.
+    require(tokenId_ > 0, "Mint: token id must not be zero");
+    require(tokenId_ <= _totalSupply, "Mint: token id must not bigger than total supply");
+
     _mint(to_, tokenId_);
   }
 
