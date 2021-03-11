@@ -75,6 +75,12 @@ module.exports = {
     // network_id: 2111,   // This network is yours, in the cloud.
     // production: true    // Treats this network as if it was a public net. (default: false)
     // }
+    mainnet: {
+      provider: function() {
+        return new HDWalletProvider(mnemonic, `https://mainnet.infura.io/v3/${infuraProjectId}`)
+      },
+      network_id: 1
+    },
     ropsten: {
       provider: function() {
         return new HDWalletProvider(mnemonic, `https://ropsten.infura.io/v3/${infuraProjectId}`)
