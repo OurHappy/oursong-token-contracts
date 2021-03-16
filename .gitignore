@@ -2,5 +2,7 @@
 /node_modules
 /contracts/artifacts
 /coverage
-secrets.json
+/.coverage_artifacts
+/.coverage_contracts
 coverage.json
+secrets.json
