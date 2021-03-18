@@ -6,33 +6,25 @@ import "@openzeppelin/contracts/utils/Context.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721Burnable.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721Pausable.sol";
-import "@openzeppelin/contracts/math/SafeMath.sol";
 
 contract OurSongNFToken is Context, Ownable, ERC721Burnable, ERC721Pausable {
-  using SafeMath for uint256;
+  string private _contractURI;
 
-  uint256 private _totalSupply;
-
-  constructor(string memory name_, string memory symbol_, uint256 initialSupply_, string memory baseURI_, address owner_) public ERC721(name_, symbol_) {
-    setBaseURI(baseURI_);
-    addTotalSupply(initialSupply_);
-
-    transferOwnership(owner_);
-  }
-
-  /**
-    * @dev See {IERC721Enumerable-totalSupply}.
-    */
-  function totalSupply() public view virtual override returns (uint256) {
-    return _totalSupply;
-  }
-
-  function addTotalSupply(uint256 amount_) public virtual onlyOwner {
-    _totalSupply = _totalSupply.add(amount_);
+  constructor(string memory name_, string memory symbol_, string memory baseURI_) public ERC721(name_, symbol_) {
+    _setBaseURI(baseURI_);
+    setContractURI(baseURI_);
   }
 
   function setBaseURI(string memory baseURI_) public virtual onlyOwner {
     _setBaseURI(baseURI_);
+  }
+
+  function contractURI() public view virtual returns (string memory) {
+    return _contractURI;
+  }
+
+  function setContractURI(string memory contractURI_) public virtual onlyOwner {
+    _contractURI = contractURI_;
   }
 
   /**
@@ -47,11 +39,6 @@ contract OurSongNFToken is Context, Ownable, ERC721Burnable, ERC721Pausable {
     * - the caller must have the `MINTER_ROLE`.
     */
   function mint(address to_, uint256 tokenId_) public virtual onlyOwner {
-    // We cannot just use balanceOf to create the new tokenId because tokens
-    // can be burned (destroyed), so we need a separate counter.
-    require(tokenId_ > 0, "Mint: token id must not be zero");
-    require(tokenId_ <= _totalSupply, "Mint: token id must not bigger than total supply");
-
     _mint(to_, tokenId_);
   }
 

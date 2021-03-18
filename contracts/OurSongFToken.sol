@@ -10,10 +10,14 @@ import "@openzeppelin/contracts/token/ERC1155/ERC1155Pausable.sol";
 contract OurSongFToken is Context, Ownable, ERC1155Burnable, ERC1155Pausable {
   string private _name;
   string private _symbol;
+  string private _contractURI;
 
   constructor(string memory uri_) public ERC1155(uri_) {
     _name = 'OURSONG NFT 1155';
     _symbol = 'OURNFT1155';
+    _setURI(uri_);
+    setContractURI(uri_);
+
     _mint(_msgSender(), 0, 1, "");
   }
 
@@ -34,6 +38,14 @@ contract OurSongFToken is Context, Ownable, ERC1155Burnable, ERC1155Pausable {
 
   function setURI(string memory uri_) public virtual onlyOwner {
     _setURI(uri_);
+  }
+
+  function contractURI() public view virtual returns (string memory) {
+    return _contractURI;
+  }
+
+  function setContractURI(string memory contractURI_) public virtual onlyOwner {
+    _contractURI = contractURI_;
   }
 
   /**

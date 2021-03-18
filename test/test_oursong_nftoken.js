@@ -117,6 +117,20 @@ contract('OurSongNFToken', function (accounts) {
       "type": "function"
     };
 
+    const setContractURIABI = {
+        "inputs": [
+            {
+                "internalType": "string",
+                "name": "contractURI_",
+                "type": "string"
+            }
+        ],
+        "name": "setContractURI",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }
+
     const transferOwnershipABI = {
       "inputs": [
         {
@@ -135,7 +149,8 @@ contract('OurSongNFToken', function (accounts) {
         this.sstAdmin = await SSTAdminContract.new();
         await this.sstAdmin.setWhiteList(initialHolder, 1);
         await this.sstAdmin.setWhiteList(anotherAccount, 1);
-        this.nfToken = await OurSongNFToken.new(TOKEN_NAME, TOKEN_SYMBOL, INITIAL_SUPPLY, INITIAL_BASE_URI, this.sstAdmin.address);
+        this.nfToken = await OurSongNFToken.new(TOKEN_NAME, TOKEN_SYMBOL, INITIAL_BASE_URI);
+        await this.nfToken.transferOwnership(this.sstAdmin.address);
     });
 
     describe('should met initial settings', async () => {
@@ -145,10 +160,6 @@ contract('OurSongNFToken', function (accounts) {
 
         it('has a symbol', async function () {
             expect(await this.nfToken.symbol()).to.equal(TOKEN_SYMBOL);
-        });
-
-        it('met initial supply with total supply', async function () {
-            expect(await this.nfToken.totalSupply()).to.be.bignumber.equal(INITIAL_SUPPLY);
         });
 
         it('met initial base uri with base uri', async function () {
@@ -203,26 +214,6 @@ contract('OurSongNFToken', function (accounts) {
             await tryCatch(this.sstAdmin.execute(this.nfToken.address, mintCallData, 2, { from: fourthAccount }), errTypes.revert);
 
             expect(await this.nfToken.balanceOf(this.sstAdmin.address)).to.be.bignumber.equal(new BN(0));
-        });
-
-        it('can transfer admin and can not mint invalid token id', async function () {
-            let transferOwnershipCallData = web3.eth.abi.encodeFunctionCall(transferOwnershipABI, [initialHolder]);
-            let receipt = await this.sstAdmin.execute(this.nfToken.address, transferOwnershipCallData, 1, { from: initialHolder });
-            expectEvent(receipt, 'Execution');
-
-            await this.nfToken.mint(initialHolder, 1, { from: initialHolder });
-
-            expect(await this.nfToken.ownerOf(1)).to.equal(initialHolder);
-
-            await expectRevert(
-                this.nfToken.mint(initialHolder, 0, { from: initialHolder }),
-                'Mint: token id must not be zero'
-            );
-
-            await expectRevert(
-                this.nfToken.mint(initialHolder, 6, { from: initialHolder }),
-                'Mint: token id must not bigger than total supply'
-            );
         });
     });
 
@@ -284,29 +275,6 @@ contract('OurSongNFToken', function (accounts) {
         });
     });
 
-    describe('should have add total supply function', async function () {
-        it('can add total supply by admin', async function () {
-            expect(await this.nfToken.totalSupply()).to.be.bignumber.equal(INITIAL_SUPPLY);
-
-            let addTotalSupplyCallData = web3.eth.abi.encodeFunctionCall(addTotalSupplyABI, [ADD_SUPPLY]);
-            let receipt = await this.sstAdmin.execute(this.nfToken.address, addTotalSupplyCallData, 1, { from: initialHolder });
-            expectEvent(receipt, 'Execution');
-
-            expect(await this.nfToken.totalSupply()).to.be.bignumber.equal(INITIAL_SUPPLY.add(ADD_SUPPLY));
-        });
-
-        it('can not add total supply by not admin', async function () {
-            expect(await this.nfToken.totalSupply()).to.be.bignumber.equal(INITIAL_SUPPLY);
-
-            await expectRevert(
-                this.nfToken.addTotalSupply(ADD_SUPPLY, { from: initialHolder }),
-                'Ownable: caller is not the owner'
-            );
-
-            expect(await this.nfToken.totalSupply()).to.be.bignumber.equal(INITIAL_SUPPLY);
-        });
-    });
-
     describe('should have pause/unpause function', async function () {
         it('can pause/unpause by admin', async function () {
             expect(await this.nfToken.paused()).equal(false);
@@ -361,6 +329,29 @@ contract('OurSongNFToken', function (accounts) {
             );
 
             expect(await this.nfToken.baseURI()).to.be.bignumber.equal(INITIAL_BASE_URI);
+        });
+    });
+
+    describe('should have set contract URI function', async function () {
+        it('can set contract URI by admin', async function () {
+            expect(await this.nfToken.contractURI()).to.be.bignumber.equal(INITIAL_BASE_URI);
+
+            let setContractURICallData = web3.eth.abi.encodeFunctionCall(setContractURIABI, [NEW_BASE_URI]);
+            let receipt = await this.sstAdmin.execute(this.nfToken.address, setContractURICallData, 1, { from: initialHolder });
+            expectEvent(receipt, 'Execution');
+
+            expect(await this.nfToken.contractURI()).to.be.bignumber.equal(NEW_BASE_URI);
+        });
+
+        it('can not set contract URI by not admin', async function () {
+            expect(await this.nfToken.contractURI()).to.be.bignumber.equal(INITIAL_BASE_URI);
+
+            await expectRevert(
+                this.nfToken.setContractURI(NEW_BASE_URI, { from: initialHolder }),
+                'Ownable: caller is not the owner'
+            );
+
+            expect(await this.nfToken.contractURI()).to.be.bignumber.equal(INITIAL_BASE_URI);
         });
     });
 });
