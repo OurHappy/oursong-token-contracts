@@ -294,6 +294,17 @@ contract('OurSongNFToken', function (accounts) {
 
             expect(await this.nfToken.totalSupply()).to.be.bignumber.equal(INITIAL_SUPPLY.add(ADD_SUPPLY));
         });
+
+        it('can not add total supply by not admin', async function () {
+            expect(await this.nfToken.totalSupply()).to.be.bignumber.equal(INITIAL_SUPPLY);
+
+            await expectRevert(
+                this.nfToken.addTotalSupply(ADD_SUPPLY, { from: initialHolder }),
+                'Ownable: caller is not the owner'
+            );
+
+            expect(await this.nfToken.totalSupply()).to.be.bignumber.equal(INITIAL_SUPPLY);
+        });
     });
 
     describe('should have pause/unpause function', async function () {
@@ -309,6 +320,22 @@ contract('OurSongNFToken', function (accounts) {
             let unpauseCallData = web3.eth.abi.encodeFunctionCall(unpauseABI, []);
             receipt = await this.sstAdmin.execute(this.nfToken.address, unpauseCallData, 1, { from: initialHolder });
             expectEvent(receipt, 'Execution');
+
+            expect(await this.nfToken.paused()).equal(false);
+        });
+
+        it('can not pause/unpause by not admin', async function () {
+            expect(await this.nfToken.paused()).equal(false);
+
+            await expectRevert(
+                this.nfToken.pause({ from: initialHolder }),
+                'Ownable: caller is not the owner'
+            );
+
+            await expectRevert(
+                this.nfToken.unpause({ from: initialHolder }),
+                'Ownable: caller is not the owner'
+            );
 
             expect(await this.nfToken.paused()).equal(false);
         });

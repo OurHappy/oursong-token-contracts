@@ -3,34 +3,63 @@ pragma solidity >=0.4.22 <0.9.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Context.sol";
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "@openzeppelin/contracts/token/ERC20/ERC20Burnable.sol";
-import "@openzeppelin/contracts/token/ERC20/ERC20Pausable.sol";
+import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
+import "@openzeppelin/contracts/token/ERC1155/ERC1155Burnable.sol";
+import "@openzeppelin/contracts/token/ERC1155/ERC1155Pausable.sol";
 
-contract OurSongFToken is Context, Ownable, ERC20Burnable, ERC20Pausable {
-  constructor(string memory name_, string memory symbol_, uint256 initialSupply_, uint8 decimals_, address owner_) public ERC20(name_, symbol_) {
-    _setupDecimals(decimals_);
-    _mint(_msgSender(), initialSupply_);
-    transferOwnership(owner_);
+contract OurSongFToken is Context, Ownable, ERC1155Burnable, ERC1155Pausable {
+  string private _name;
+  string private _symbol;
+
+  constructor(string memory uri_) public ERC1155(uri_) {
+    _name = 'OURSONG NFT 1155';
+    _symbol = 'OURNFT1155';
+    _mint(_msgSender(), 0, 1, "");
   }
 
   /**
-    * @dev Creates `amount` new tokens for `to`.
+    * @dev Returns the name of the token.
+    */
+  function name() public view virtual returns (string memory) {
+    return _name;
+  }
+
+  /**
+    * @dev Returns the symbol of the token, usually a shorter version of the
+    * name.
+    */
+  function symbol() public view virtual returns (string memory) {
+    return _symbol;
+  }
+
+  function setURI(string memory uri_) public virtual onlyOwner {
+    _setURI(uri_);
+  }
+
+  /**
+    * @dev Creates `amount` new tokens for `to`, of token type `id`.
     *
-    * See {ERC20-_mint}.
+    * See {ERC1155-_mint}.
     *
     * Requirements:
     *
     * - the caller must have the `MINTER_ROLE`.
     */
-  function mint(address to, uint256 amount) public virtual onlyOwner {
-    _mint(to, amount);
+  function mint(address to, uint256 id, uint256 amount, bytes memory data) public virtual onlyOwner {
+    _mint(to, id, amount, data);
+  }
+
+  /**
+    * @dev xref:ROOT:erc1155.adoc#batch-operations[Batched] variant of {mint}.
+    */
+  function mintBatch(address to, uint256[] memory ids, uint256[] memory amounts, bytes memory data) public virtual onlyOwner {
+    _mintBatch(to, ids, amounts, data);
   }
 
   /**
     * @dev Pauses all token transfers.
     *
-    * See {ERC20Pausable} and {Pausable-_pause}.
+    * See {ERC1155Pausable} and {Pausable-_pause}.
     *
     * Requirements:
     *
@@ -43,7 +72,7 @@ contract OurSongFToken is Context, Ownable, ERC20Burnable, ERC20Pausable {
   /**
     * @dev Unpauses all token transfers.
     *
-    * See {ERC20Pausable} and {Pausable-_unpause}.
+    * See {ERC1155Pausable} and {Pausable-_unpause}.
     *
     * Requirements:
     *
@@ -53,7 +82,16 @@ contract OurSongFToken is Context, Ownable, ERC20Burnable, ERC20Pausable {
     _unpause();
   }
 
-  function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual override(ERC20, ERC20Pausable) {
-    super._beforeTokenTransfer(from, to, amount);
+  function _beforeTokenTransfer(
+      address operator,
+      address from,
+      address to,
+      uint256[] memory ids,
+      uint256[] memory amounts,
+      bytes memory data
+  )
+    internal virtual override(ERC1155, ERC1155Pausable)
+  {
+    super._beforeTokenTransfer(operator, from, to, ids, amounts, data);
   }
 }

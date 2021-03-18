@@ -5,6 +5,8 @@ OurSong Token Contracts
 ## Install
 
 ```
+nvm use v14.15.3
+
 npm install
 ```
 
