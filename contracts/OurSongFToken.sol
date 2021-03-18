@@ -17,8 +17,6 @@ contract OurSongFToken is Context, Ownable, ERC1155Burnable, ERC1155Pausable {
     _symbol = 'OURNFT1155';
     _setURI(uri_);
     setContractURI(uri_);
-
-    _mint(_msgSender(), 0, 1, "");
   }
 
   /**

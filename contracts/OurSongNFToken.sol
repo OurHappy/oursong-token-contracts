@@ -6,8 +6,12 @@ import "@openzeppelin/contracts/utils/Context.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721Burnable.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721Pausable.sol";
+import "@openzeppelin/contracts/math/SafeMath.sol";
 
 contract OurSongNFToken is Context, Ownable, ERC721Burnable, ERC721Pausable {
+  using SafeMath for uint256;
+
+  uint256 private _totalSupply;
   string private _contractURI;
 
   constructor(string memory name_, string memory symbol_, string memory baseURI_) public ERC721(name_, symbol_) {
