@@ -3,7 +3,7 @@ const { expect } = require('chai');
 const tryCatch = require("./exceptions.js").tryCatch;
 const errTypes = require("./exceptions.js").errTypes;
 
-const SSTAdminContract = artifacts.require('SSTAdminContract');
+const OurAdmin = artifacts.require('OurAdmin');
 const OurSongNFToken = artifacts.require('OurSongNFToken');
 
 contract('OurSongNFToken', function (accounts) {
@@ -11,10 +11,8 @@ contract('OurSongNFToken', function (accounts) {
 
     const TOKEN_NAME = 'OurSongNFToken';
     const TOKEN_SYMBOL = 'OSNFT';
-    const INITIAL_SUPPLY = new BN(5);
-    const ADD_SUPPLY = new BN(2);
-    const INITIAL_BASE_URI = 'https://www.oursong.com/project/custom_id/token/';
-    const NEW_BASE_URI = 'https://new.oursong.com/project/custom_id/token/';
+    const INITIAL_BASE_URI = 'https://stage.oursong.com/project/custom_id/erc721token-meta/';
+    const NEW_BASE_URI = 'https://www.oursong.com/project/custom_id/erc721token-meta/';
 
     const mintABI = {
         "inputs": [
@@ -35,7 +33,7 @@ contract('OurSongNFToken', function (accounts) {
         "type": "function"
     };
 
-    const trasferFromABI = {
+    const safeTransferFromABI = {
         "inputs": [
             {
                 "internalType": "address",
@@ -146,11 +144,11 @@ contract('OurSongNFToken', function (accounts) {
     };
 
     beforeEach(async function () {
-        this.sstAdmin = await SSTAdminContract.new();
-        await this.sstAdmin.setWhiteList(initialHolder, 1);
-        await this.sstAdmin.setWhiteList(anotherAccount, 1);
+        this.ourAdmin = await OurAdmin.new();
+        await this.ourAdmin.setWhiteList(initialHolder, 1);
+        await this.ourAdmin.setWhiteList(anotherAccount, 1);
         this.nfToken = await OurSongNFToken.new(TOKEN_NAME, TOKEN_SYMBOL, INITIAL_BASE_URI);
-        await this.nfToken.transferOwnership(this.sstAdmin.address);
+        await this.nfToken.transferOwnership(this.ourAdmin.address);
     });
 
     describe('should met initial settings', async () => {
@@ -167,7 +165,7 @@ contract('OurSongNFToken', function (accounts) {
         });
 
         it('met initial owner with owenr', async function () {
-            expect(await this.nfToken.owner()).to.equal(this.sstAdmin.address);
+            expect(await this.nfToken.owner()).to.equal(this.ourAdmin.address);
         });
     });
 
@@ -188,59 +186,59 @@ contract('OurSongNFToken', function (accounts) {
 
         it('can mint by admin through admin contract', async function () {
 
-            expect(await this.nfToken.balanceOf(this.sstAdmin.address)).to.be.bignumber.equal(new BN(0));
+            expect(await this.nfToken.balanceOf(this.ourAdmin.address)).to.be.bignumber.equal(new BN(0));
 
-            let mintCallData = web3.eth.abi.encodeFunctionCall(mintABI, [this.sstAdmin.address, 1]);
-            let receipt = await this.sstAdmin.execute(this.nfToken.address, mintCallData, 1, { from: initialHolder });
+            let mintCallData = web3.eth.abi.encodeFunctionCall(mintABI, [this.ourAdmin.address, 1]);
+            let receipt = await this.ourAdmin.execute(this.nfToken.address, mintCallData, 1, { from: initialHolder });
             expectEvent(receipt, 'Execution');
 
-            mintCallData = web3.eth.abi.encodeFunctionCall(mintABI, [this.sstAdmin.address, 2]);
-            receipt = await this.sstAdmin.execute(this.nfToken.address, mintCallData, 2, { from: anotherAccount });
+            mintCallData = web3.eth.abi.encodeFunctionCall(mintABI, [this.ourAdmin.address, 2]);
+            receipt = await this.ourAdmin.execute(this.nfToken.address, mintCallData, 2, { from: anotherAccount });
             expectEvent(receipt, 'Execution');
 
-            mintCallData = web3.eth.abi.encodeFunctionCall(mintABI, [this.sstAdmin.address, 2]);
-            receipt = await this.sstAdmin.execute(this.nfToken.address, mintCallData, 3, { from: anotherAccount });
+            mintCallData = web3.eth.abi.encodeFunctionCall(mintABI, [this.ourAdmin.address, 2]);
+            receipt = await this.ourAdmin.execute(this.nfToken.address, mintCallData, 3, { from: anotherAccount });
             expectEvent(receipt, 'ExecutionFailure');
 
-            expect(await this.nfToken.balanceOf(this.sstAdmin.address)).to.be.bignumber.equal(new BN(2));
+            expect(await this.nfToken.balanceOf(this.ourAdmin.address)).to.be.bignumber.equal(new BN(2));
         });
 
         it('can not mint by not admin through admin contract', async function () {
 
-            expect(await this.nfToken.balanceOf(this.sstAdmin.address)).to.be.bignumber.equal(new BN(0));
+            expect(await this.nfToken.balanceOf(this.ourAdmin.address)).to.be.bignumber.equal(new BN(0));
 
-            let mintCallData = web3.eth.abi.encodeFunctionCall(mintABI, [this.sstAdmin.address, 1]);
+            let mintCallData = web3.eth.abi.encodeFunctionCall(mintABI, [this.ourAdmin.address, 1]);
 
-            await tryCatch(this.sstAdmin.execute(this.nfToken.address, mintCallData, 2, { from: fourthAccount }), errTypes.revert);
+            await tryCatch(this.ourAdmin.execute(this.nfToken.address, mintCallData, 2, { from: fourthAccount }), errTypes.revert);
 
-            expect(await this.nfToken.balanceOf(this.sstAdmin.address)).to.be.bignumber.equal(new BN(0));
+            expect(await this.nfToken.balanceOf(this.ourAdmin.address)).to.be.bignumber.equal(new BN(0));
         });
     });
 
     describe('should have right balance after transfer', async function () {
         it('can transfer by token owner', async function () {
-            let mintCallData = web3.eth.abi.encodeFunctionCall(mintABI, [this.sstAdmin.address, 1]);
-            let receipt = await this.sstAdmin.execute(this.nfToken.address, mintCallData, 1, { from: initialHolder });
+            let mintCallData = web3.eth.abi.encodeFunctionCall(mintABI, [this.ourAdmin.address, 1]);
+            let receipt = await this.ourAdmin.execute(this.nfToken.address, mintCallData, 1, { from: initialHolder });
             expectEvent(receipt, 'Execution');
 
-            expect(await this.nfToken.ownerOf(1)).to.equal(this.sstAdmin.address);
+            expect(await this.nfToken.ownerOf(1)).to.equal(this.ourAdmin.address);
 
-            mintCallData = web3.eth.abi.encodeFunctionCall(mintABI, [this.sstAdmin.address, 2]);
-            receipt = await this.sstAdmin.execute(this.nfToken.address, mintCallData, 2, { from: anotherAccount });
+            mintCallData = web3.eth.abi.encodeFunctionCall(mintABI, [this.ourAdmin.address, 2]);
+            receipt = await this.ourAdmin.execute(this.nfToken.address, mintCallData, 2, { from: anotherAccount });
             expectEvent(receipt, 'Execution');
 
-            expect(await this.nfToken.ownerOf(2)).to.equal(this.sstAdmin.address);
+            expect(await this.nfToken.ownerOf(2)).to.equal(this.ourAdmin.address);
 
-            expect(await this.nfToken.balanceOf(this.sstAdmin.address)).to.be.bignumber.equal(new BN(2));
+            expect(await this.nfToken.balanceOf(this.ourAdmin.address)).to.be.bignumber.equal(new BN(2));
 
-            let transferFromCallData = web3.eth.abi.encodeFunctionCall(trasferFromABI, [this.sstAdmin.address, recipient, 1]);
-            receipt = await this.sstAdmin.execute(this.nfToken.address, transferFromCallData, 3, { from: anotherAccount });
+            let transferFromCallData = web3.eth.abi.encodeFunctionCall(safeTransferFromABI, [this.ourAdmin.address, recipient, 1]);
+            receipt = await this.ourAdmin.execute(this.nfToken.address, transferFromCallData, 3, { from: anotherAccount });
             expectEvent(receipt, 'Execution');
 
             expect(await this.nfToken.ownerOf(1)).to.equal(recipient);
 
             await expectRevert(
-                this.nfToken.transferFrom(recipient, initialHolder, 1, { from: initialHolder }),
+                this.nfToken.safeTransferFrom(recipient, initialHolder, 1, { from: initialHolder }),
                 'ERC721: transfer caller is not owner nor approved'
             );
 
@@ -252,20 +250,20 @@ contract('OurSongNFToken', function (accounts) {
 
     describe('should have burn function', async function () {
         it('can burn by token owner', async function () {
-            let mintCallData = web3.eth.abi.encodeFunctionCall(mintABI, [this.sstAdmin.address, 1]);
-            let receipt = await this.sstAdmin.execute(this.nfToken.address, mintCallData, 1, { from: initialHolder });
+            let mintCallData = web3.eth.abi.encodeFunctionCall(mintABI, [this.ourAdmin.address, 1]);
+            let receipt = await this.ourAdmin.execute(this.nfToken.address, mintCallData, 1, { from: initialHolder });
             expectEvent(receipt, 'Execution');
 
-            expect(await this.nfToken.ownerOf(1)).to.equal(this.sstAdmin.address);
+            expect(await this.nfToken.ownerOf(1)).to.equal(this.ourAdmin.address);
 
-            mintCallData = web3.eth.abi.encodeFunctionCall(mintABI, [this.sstAdmin.address, 2]);
-            receipt = await this.sstAdmin.execute(this.nfToken.address, mintCallData, 2, { from: anotherAccount });
+            mintCallData = web3.eth.abi.encodeFunctionCall(mintABI, [this.ourAdmin.address, 2]);
+            receipt = await this.ourAdmin.execute(this.nfToken.address, mintCallData, 2, { from: anotherAccount });
             expectEvent(receipt, 'Execution');
 
-            expect(await this.nfToken.ownerOf(2)).to.equal(this.sstAdmin.address);
+            expect(await this.nfToken.ownerOf(2)).to.equal(this.ourAdmin.address);
 
             let burnCallData = web3.eth.abi.encodeFunctionCall(burnABI, [1]);
-            receipt = await this.sstAdmin.execute(this.nfToken.address, burnCallData, 3, { from: initialHolder });
+            receipt = await this.ourAdmin.execute(this.nfToken.address, burnCallData, 3, { from: initialHolder });
             expectEvent(receipt, 'Execution');
 
             await expectRevert(
@@ -280,13 +278,13 @@ contract('OurSongNFToken', function (accounts) {
             expect(await this.nfToken.paused()).equal(false);
 
             let pauseCallData = web3.eth.abi.encodeFunctionCall(pauseABI, []);
-            let receipt = await this.sstAdmin.execute(this.nfToken.address, pauseCallData, 1, { from: initialHolder });
+            let receipt = await this.ourAdmin.execute(this.nfToken.address, pauseCallData, 1, { from: initialHolder });
             expectEvent(receipt, 'Execution');
 
             expect(await this.nfToken.paused()).equal(true);
 
             let unpauseCallData = web3.eth.abi.encodeFunctionCall(unpauseABI, []);
-            receipt = await this.sstAdmin.execute(this.nfToken.address, unpauseCallData, 1, { from: initialHolder });
+            receipt = await this.ourAdmin.execute(this.nfToken.address, unpauseCallData, 1, { from: initialHolder });
             expectEvent(receipt, 'Execution');
 
             expect(await this.nfToken.paused()).equal(false);
@@ -311,47 +309,47 @@ contract('OurSongNFToken', function (accounts) {
 
     describe('should have set base URI function', async function () {
         it('can set base URI by admin', async function () {
-            expect(await this.nfToken.baseURI()).to.be.bignumber.equal(INITIAL_BASE_URI);
+            expect(await this.nfToken.baseURI()).to.equal(INITIAL_BASE_URI);
 
             let setBaseURICallData = web3.eth.abi.encodeFunctionCall(setBaseURIABI, [NEW_BASE_URI]);
-            let receipt = await this.sstAdmin.execute(this.nfToken.address, setBaseURICallData, 1, { from: initialHolder });
+            let receipt = await this.ourAdmin.execute(this.nfToken.address, setBaseURICallData, 1, { from: initialHolder });
             expectEvent(receipt, 'Execution');
 
-            expect(await this.nfToken.baseURI()).to.be.bignumber.equal(NEW_BASE_URI);
+            expect(await this.nfToken.baseURI()).to.equal(NEW_BASE_URI);
         });
 
         it('can not set base URI by not admin', async function () {
-            expect(await this.nfToken.baseURI()).to.be.bignumber.equal(INITIAL_BASE_URI);
+            expect(await this.nfToken.baseURI()).to.equal(INITIAL_BASE_URI);
 
             await expectRevert(
                 this.nfToken.setBaseURI(NEW_BASE_URI, { from: initialHolder }),
                 'Ownable: caller is not the owner'
             );
 
-            expect(await this.nfToken.baseURI()).to.be.bignumber.equal(INITIAL_BASE_URI);
+            expect(await this.nfToken.baseURI()).to.equal(INITIAL_BASE_URI);
         });
     });
 
     describe('should have set contract URI function', async function () {
         it('can set contract URI by admin', async function () {
-            expect(await this.nfToken.contractURI()).to.be.bignumber.equal(INITIAL_BASE_URI);
+            expect(await this.nfToken.contractURI()).to.equal(INITIAL_BASE_URI);
 
             let setContractURICallData = web3.eth.abi.encodeFunctionCall(setContractURIABI, [NEW_BASE_URI]);
-            let receipt = await this.sstAdmin.execute(this.nfToken.address, setContractURICallData, 1, { from: initialHolder });
+            let receipt = await this.ourAdmin.execute(this.nfToken.address, setContractURICallData, 1, { from: initialHolder });
             expectEvent(receipt, 'Execution');
 
-            expect(await this.nfToken.contractURI()).to.be.bignumber.equal(NEW_BASE_URI);
+            expect(await this.nfToken.contractURI()).to.equal(NEW_BASE_URI);
         });
 
         it('can not set contract URI by not admin', async function () {
-            expect(await this.nfToken.contractURI()).to.be.bignumber.equal(INITIAL_BASE_URI);
+            expect(await this.nfToken.contractURI()).to.equal(INITIAL_BASE_URI);
 
             await expectRevert(
                 this.nfToken.setContractURI(NEW_BASE_URI, { from: initialHolder }),
                 'Ownable: caller is not the owner'
             );
 
-            expect(await this.nfToken.contractURI()).to.be.bignumber.equal(INITIAL_BASE_URI);
+            expect(await this.nfToken.contractURI()).to.equal(INITIAL_BASE_URI);
         });
     });
 });

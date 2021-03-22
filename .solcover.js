@@ -1,3 +1,3 @@
 module.exports = {
-  skipFiles: ['SSTAdminContract.sol', 'GameItems.sol']
+  skipFiles: ['OurAdmin.sol', 'GameItems.sol']
 };
