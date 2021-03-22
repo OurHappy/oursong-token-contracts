@@ -17,7 +17,7 @@ contract OurAdmin is ERC721Holder, ERC1155Holder {
     mapping (address => bool) whiteList;
     address owner;
     address newOwner;
-    bool suspend = false;
+    //bool suspend = false;
 
     constructor () public {
         owner = msg.sender;
@@ -38,7 +38,7 @@ contract OurAdmin is ERC721Holder, ERC1155Holder {
         bytes memory _data,
         uint256 _nonce) external onlyWhiteList returns (bool)
     {
-        require(!suspend);
+        //require(!suspend);
         bytes32 hash = keccak256(abi.encodePacked(this, _destination, _nonce, _data));
         require(!executed[hash]);
         (bool success, ) = _destination.call{value: 0}(_data);
@@ -53,17 +53,17 @@ contract OurAdmin is ERC721Holder, ERC1155Holder {
     }
 
     function setWhiteList(address _whiteList, bool _isAdd) external onlyOwner returns (bool) {
-        require(!suspend);
+        //require(!suspend);
         whiteList[_whiteList] = _isAdd;
         emit LogSetWhiteList(msg.sender, _whiteList, _isAdd);
         return true;
     }
 
-    function dropSelf() external onlyOwner returns (bool) {
-        suspend = true;
-        emit LogDropSelf(msg.sender);
-        return true;
-    }
+    //function dropSelf() external onlyOwner returns (bool) {
+    //    suspend = true;
+    //    emit LogDropSelf(msg.sender);
+    //    return true;
+    //}
 
     function transferOwnership(address _newOwner) external onlyOwner returns (bool) {
         newOwner = _newOwner;
@@ -90,7 +90,7 @@ contract OurAdmin is ERC721Holder, ERC1155Holder {
         return newOwner;
     }
 
-    function isSuspend() public view returns (bool) {
-        return suspend;
-    }
+    //function isSuspend() public view returns (bool) {
+    //    return suspend;
+    //}
 }
