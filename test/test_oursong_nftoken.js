@@ -4,6 +4,7 @@ const tryCatch = require("./exceptions.js").tryCatch;
 const errTypes = require("./exceptions.js").errTypes;
 
 const OurAdmin = artifacts.require('OurAdmin');
+const OurSongNFTokenFactory = artifacts.require('OurSongNFTokenFactory');
 const OurSongNFToken = artifacts.require('OurSongNFToken');
 
 contract('OurSongNFToken', function (accounts) {
@@ -147,8 +148,11 @@ contract('OurSongNFToken', function (accounts) {
         this.ourAdmin = await OurAdmin.new();
         await this.ourAdmin.setWhiteList(initialHolder, 1);
         await this.ourAdmin.setWhiteList(anotherAccount, 1);
-        this.nfToken = await OurSongNFToken.new(TOKEN_NAME, TOKEN_SYMBOL, INITIAL_BASE_URI);
-        await this.nfToken.transferOwnership(this.ourAdmin.address);
+        this.nfTokenFactory = await OurSongNFTokenFactory.new(this.ourAdmin.address);
+        let receipt = await this.nfTokenFactory.createOurSongNFToken(TOKEN_NAME, TOKEN_SYMBOL, INITIAL_BASE_URI, INITIAL_BASE_URI, { from: initialHolder });
+        let newContractAddress = receipt.receipt.logs[0].args.newContract;
+
+        this.nfToken = new OurSongNFToken(newContractAddress);
     });
 
     describe('should met initial settings', async () => {
