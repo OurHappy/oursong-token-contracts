@@ -24,7 +24,7 @@
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 
-const { infuraProjectId, mnemonic, etherscanApiKey } = require('./secrets.json');
+const { infuraProjectId, mnemonic, etherscanApiKey, bscscanApiKey } = require('./secrets.json');
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 
 module.exports = {
@@ -87,6 +87,12 @@ module.exports = {
       },
       network_id: 3
     },
+    bsctest: {
+      provider: function() {
+        return new HDWalletProvider(mnemonic, `https://data-seed-prebsc-1-s1.binance.org:8545/`)
+      },
+      network_id: 97
+    },
     development: {
       host: "localhost",
       port: 8545,
@@ -130,6 +136,7 @@ module.exports = {
   ],
 
   api_keys: {
-    etherscan: etherscanApiKey
+    etherscan: etherscanApiKey,
+    bscscan: bscscanApiKey,
   }
 };
