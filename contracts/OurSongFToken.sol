@@ -6,11 +6,15 @@ import "@openzeppelin/contracts/utils/Context.sol";
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "@openzeppelin/contracts/token/ERC1155/ERC1155Burnable.sol";
 import "@openzeppelin/contracts/token/ERC1155/ERC1155Pausable.sol";
+import "@openzeppelin/contracts/math/SafeMath.sol";
 
 contract OurSongFToken is Context, Ownable, ERC1155Burnable, ERC1155Pausable {
+  using SafeMath for uint256;
+
   string private _name;
   string private _symbol;
   string private _contractURI;
+  mapping (uint256 => uint256) public _tokenSupply;
 
   constructor(string memory uri_) public ERC1155(uri_) {
     _name = 'OURSONG NFT 1155';
@@ -47,6 +51,17 @@ contract OurSongFToken is Context, Ownable, ERC1155Burnable, ERC1155Pausable {
   }
 
   /**
+   * @dev Returns the total quantity for a token ID
+   * @param id uint256 ID of the token to query
+   * @return amount of token in existence
+   */
+  function totalSupply(
+    uint256 id
+  ) public view returns (uint256) {
+    return _tokenSupply[id];
+  }
+
+  /**
     * @dev Creates `amount` new tokens for `to`, of token type `id`.
     *
     * See {ERC1155-_mint}.
@@ -57,13 +72,7 @@ contract OurSongFToken is Context, Ownable, ERC1155Burnable, ERC1155Pausable {
     */
   function mint(address to, uint256 id, uint256 amount, bytes memory data) public virtual onlyOwner {
     _mint(to, id, amount, data);
-  }
-
-  /**
-    * @dev xref:ROOT:erc1155.adoc#batch-operations[Batched] variant of {mint}.
-    */
-  function mintBatch(address to, uint256[] memory ids, uint256[] memory amounts, bytes memory data) public virtual onlyOwner {
-    _mintBatch(to, ids, amounts, data);
+    _tokenSupply[id] = _tokenSupply[id].add(amount);
   }
 
   /**

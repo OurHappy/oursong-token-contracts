@@ -43,35 +43,6 @@ contract('OurSongFToken', function (accounts) {
         "type": "function"
     };
 
-    const mintBatchABI = {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "to",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256[]",
-                "name": "ids",
-                "type": "uint256[]"
-            },
-            {
-                "internalType": "uint256[]",
-                "name": "amounts",
-                "type": "uint256[]"
-            },
-            {
-                "internalType": "bytes",
-                "name": "data",
-                "type": "bytes"
-            }
-        ],
-        "name": "mintBatch",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    };
-
     const safeTransferFromABI = {
         "inputs": [
             {
@@ -232,30 +203,13 @@ contract('OurSongFToken', function (accounts) {
             expect(await this.fToken.balanceOf(this.ourAdmin.address, 0)).to.be.bignumber.equal(new BN(10));
             expect(await this.fToken.balanceOf(this.ourAdmin.address, 1)).to.be.bignumber.equal(new BN(100));
             expect(await this.fToken.balanceOf(this.ourAdmin.address, 2)).to.be.bignumber.equal(new BN(500));
+            expect(await this.fToken.totalSupply(2)).to.be.bignumber.equal(new BN(500));
         });
 
         it('can not mint by not admin through admin contract', async function () {
             let mintCallData = web3.eth.abi.encodeFunctionCall(mintABI, [this.ourAdmin.address, 1, 100, '0x']);
 
             await tryCatch(this.ourAdmin.execute(this.fToken.address, mintCallData, 2, { from: fourthAccount }), errTypes.revert);
-        });
-
-        it('can batch mint by admin through admin contract', async function () {
-            let mintBatchCallData = web3.eth.abi.encodeFunctionCall(
-                mintBatchABI,
-                [
-                    this.ourAdmin.address,
-                    [1, 2],
-                    [100, 200],
-                    '0x'
-                ]
-            );
-            let receipt = await this.ourAdmin.execute(this.fToken.address, mintBatchCallData, 1, { from: initialHolder });
-            expectEvent(receipt, 'Execution');
-
-            expect(await this.fToken.balanceOf(this.ourAdmin.address, 0)).to.be.bignumber.equal(new BN(10));
-            expect(await this.fToken.balanceOf(this.ourAdmin.address, 1)).to.be.bignumber.equal(new BN(100));
-            expect(await this.fToken.balanceOf(this.ourAdmin.address, 2)).to.be.bignumber.equal(new BN(200));
         });
     });
 

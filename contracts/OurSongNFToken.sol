@@ -11,7 +11,6 @@ import "@openzeppelin/contracts/math/SafeMath.sol";
 contract OurSongNFToken is Context, Ownable, ERC721Burnable, ERC721Pausable {
   using SafeMath for uint256;
 
-  uint256 private _totalSupply;
   string private _contractURI;
 
   constructor(string memory name_, string memory symbol_, string memory baseURI_) public ERC721(name_, symbol_) {
