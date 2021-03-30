@@ -9,7 +9,7 @@ contract('OurCoin', function (accounts) {
     const TOKEN_NAME = 'OurCoin';
     const TOKEN_SYMBOL = 'OUR';
     const TOKEN_DECIMAL = new BN(18);
-    const INITIAL_SUPPLY = new BN(777777777); // 777777777000000000000000000
+    const INITIAL_SUPPLY = new BN(42000000); // 42000000000000000000000000
     const TRANSFER_AMOUNT = new BN(123);
     const BURN_AMOUNT = new BN(456);
 

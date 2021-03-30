@@ -36,7 +36,7 @@ contract('OurAdmin', function (accounts) {
 
     const TOKEN_NAME = 'OurCoin';
     const TOKEN_SYMBOL = 'OUR';
-    const INITIAL_SUPPLY = new BN(777777777);
+    const INITIAL_SUPPLY = new BN(42000000);
     const TRANSFER_AMOUNT = new BN(123);
 
     beforeEach(async function () {
