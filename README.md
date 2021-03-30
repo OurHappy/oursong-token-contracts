@@ -64,13 +64,13 @@ Transaction: https://rinkeby.etherscan.io/tx/0x99e73ee1ac256cfb5782cfe29d1753689
 
 ### OurSongFToken 1155
 
-Contract Address: 0xfaB1AC26cCF09E99092d8e9C5662899c8E5F3912
+Contract Address: 0x1bd84320cCd43b968c4d545B4f9A39ac538Dcf11
 
-Transaction: https://rinkeby.etherscan.io/tx/0x0ed1ad0434437b07c2f73de41cb730731e4e394dd55dfb98b6e4c801cc3d1349
+Transaction: https://rinkeby.etherscan.io/tx/0x798f0d6c4f8c10ea332c26ba27c5278a36e2c31ae0bc90fd0f53c21f597297ca
 
 ### OurSongNFTTokenFactory
 
-Contract Address: 0xAF7A1cC61Cb267F1f7a35a26Fe86D96419E2B324
+Contract Address: 0x3F3E8256c88a916AC44C7103C07A4D65ED2bd0D2
 
-Transaction: https://rinkeby.etherscan.io/tx/0x3f922e404cbd81d13678f90d509cf010aabee5cdae8f8c5b6e395fa82647399a
+Transaction: https://rinkeby.etherscan.io/tx/0xc015db997c17398e96a4167869467da48c79de14f30a2d1e1d74b44d05f31cdd
 

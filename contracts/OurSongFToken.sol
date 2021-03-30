@@ -14,7 +14,7 @@ contract OurSongFToken is Context, Ownable, ERC1155Burnable, ERC1155Pausable {
   string private _name;
   string private _symbol;
   string private _contractURI;
-  mapping (uint256 => uint256) public _tokenSupply;
+  mapping (uint256 => uint256) private _tokenSupply;
 
   constructor(string memory uri_) public ERC1155(uri_) {
     _name = 'OURSONG NFT 1155';
