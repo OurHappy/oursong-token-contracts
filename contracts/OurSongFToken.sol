@@ -5,10 +5,9 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Context.sol";
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "@openzeppelin/contracts/token/ERC1155/ERC1155Burnable.sol";
-import "@openzeppelin/contracts/token/ERC1155/ERC1155Pausable.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 
-contract OurSongFToken is Context, Ownable, ERC1155Burnable, ERC1155Pausable {
+contract OurSongFToken is Context, Ownable, ERC1155Burnable {
   using SafeMath for uint256;
 
   string private _name;
@@ -73,44 +72,5 @@ contract OurSongFToken is Context, Ownable, ERC1155Burnable, ERC1155Pausable {
   function mint(address to, uint256 id, uint256 amount, bytes memory data) public virtual onlyOwner {
     _mint(to, id, amount, data);
     _tokenSupply[id] = _tokenSupply[id].add(amount);
-  }
-
-  /**
-    * @dev Pauses all token transfers.
-    *
-    * See {ERC1155Pausable} and {Pausable-_pause}.
-    *
-    * Requirements:
-    *
-    * - the caller must have the `PAUSER_ROLE`.
-    */
-  function pause() public virtual onlyOwner {
-    _pause();
-  }
-
-  /**
-    * @dev Unpauses all token transfers.
-    *
-    * See {ERC1155Pausable} and {Pausable-_unpause}.
-    *
-    * Requirements:
-    *
-    * - the caller must have the `PAUSER_ROLE`.
-    */
-  function unpause() public virtual onlyOwner {
-    _unpause();
-  }
-
-  function _beforeTokenTransfer(
-      address operator,
-      address from,
-      address to,
-      uint256[] memory ids,
-      uint256[] memory amounts,
-      bytes memory data
-  )
-    internal virtual override(ERC1155, ERC1155Pausable)
-  {
-    super._beforeTokenTransfer(operator, from, to, ids, amounts, data);
   }
 }

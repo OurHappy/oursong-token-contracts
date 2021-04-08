@@ -277,40 +277,6 @@ contract('OurSongNFToken', function (accounts) {
         });
     });
 
-    describe('should have pause/unpause function', async function () {
-        it('can pause/unpause by admin', async function () {
-            expect(await this.nfToken.paused()).equal(false);
-
-            let pauseCallData = web3.eth.abi.encodeFunctionCall(pauseABI, []);
-            let receipt = await this.ourAdmin.execute(this.nfToken.address, pauseCallData, 1, { from: initialHolder });
-            expectEvent(receipt, 'Execution');
-
-            expect(await this.nfToken.paused()).equal(true);
-
-            let unpauseCallData = web3.eth.abi.encodeFunctionCall(unpauseABI, []);
-            receipt = await this.ourAdmin.execute(this.nfToken.address, unpauseCallData, 1, { from: initialHolder });
-            expectEvent(receipt, 'Execution');
-
-            expect(await this.nfToken.paused()).equal(false);
-        });
-
-        it('can not pause/unpause by not admin', async function () {
-            expect(await this.nfToken.paused()).equal(false);
-
-            await expectRevert(
-                this.nfToken.pause({ from: initialHolder }),
-                'Ownable: caller is not the owner'
-            );
-
-            await expectRevert(
-                this.nfToken.unpause({ from: initialHolder }),
-                'Ownable: caller is not the owner'
-            );
-
-            expect(await this.nfToken.paused()).equal(false);
-        });
-    });
-
     describe('should have set base URI function', async function () {
         it('can set base URI by admin', async function () {
             expect(await this.nfToken.baseURI()).to.equal(INITIAL_BASE_URI);

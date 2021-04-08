@@ -5,10 +5,9 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Context.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721Burnable.sol";
-import "@openzeppelin/contracts/token/ERC721/ERC721Pausable.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 
-contract OurSongNFToken is Context, Ownable, ERC721Burnable, ERC721Pausable {
+contract OurSongNFToken is Context, Ownable, ERC721Burnable {
   using SafeMath for uint256;
 
   string private _contractURI;
@@ -43,35 +42,5 @@ contract OurSongNFToken is Context, Ownable, ERC721Burnable, ERC721Pausable {
     */
   function mint(address to_, uint256 tokenId_) public virtual onlyOwner {
     _mint(to_, tokenId_);
-  }
-
-  /**
-    * @dev Pauses all token transfers.
-    *
-    * See {ERC721Pausable} and {Pausable-_pause}.
-    *
-    * Requirements:
-    *
-    * - the caller must have the `PAUSER_ROLE`.
-    */
-  function pause() public virtual onlyOwner {
-    _pause();
-  }
-
-  /**
-    * @dev Unpauses all token transfers.
-    *
-    * See {ERC721Pausable} and {Pausable-_unpause}.
-    *
-    * Requirements:
-    *
-    * - the caller must have the `PAUSER_ROLE`.
-    */
-  function unpause() public virtual onlyOwner {
-    _unpause();
-  }
-
-  function _beforeTokenTransfer(address from, address to, uint256 tokenId) internal virtual override(ERC721, ERC721Pausable) {
-    super._beforeTokenTransfer(from, to, tokenId);
   }
 }

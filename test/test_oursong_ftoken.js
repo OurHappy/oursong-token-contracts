@@ -255,40 +255,6 @@ contract('OurSongFToken', function (accounts) {
         });
     });
 
-    describe('should have pause/unpause function', async function () {
-        it('can pause/unpause by admin', async function () {
-            expect(await this.fToken.paused()).equal(false);
-
-            let pauseCallData = web3.eth.abi.encodeFunctionCall(pauseABI, []);
-            let receipt = await this.ourAdmin.execute(this.fToken.address, pauseCallData, 1, { from: initialHolder });
-            expectEvent(receipt, 'Execution');
-
-            expect(await this.fToken.paused()).equal(true);
-
-            let unpauseCallData = web3.eth.abi.encodeFunctionCall(unpauseABI, []);
-            receipt = await this.ourAdmin.execute(this.fToken.address, unpauseCallData, 1, { from: initialHolder });
-            expectEvent(receipt, 'Execution');
-
-            expect(await this.fToken.paused()).equal(false);
-        });
-
-        it('can not pause/unpause by not admin', async function () {
-            expect(await this.fToken.paused()).equal(false);
-
-            await expectRevert(
-                this.fToken.pause({ from: initialHolder }),
-                'Ownable: caller is not the owner'
-            );
-
-            await expectRevert(
-                this.fToken.unpause({ from: initialHolder }),
-                'Ownable: caller is not the owner'
-            );
-
-            expect(await this.fToken.paused()).equal(false);
-        });
-    });
-
     describe('should have set URI function', async function () {
         it('can set URI by admin', async function () {
             expect(await this.fToken.uri(1)).to.equal(INITIAL_URI);
