@@ -6,3 +6,5 @@
 /.coverage_contracts
 coverage.json
 secrets.json
+.env
+.env.test
