@@ -54,8 +54,26 @@ npx truffle run verify OurSongNFToken@0x8f56CD54e1434d78918FdA42ec39ed9392E0dB3F
 
 ## Deploy
 
-## Rinkeby
+## Mainnet
+### OurAdmin
 
+Contract Address: 0xfaB1AC26cCF09E99092d8e9C5662899c8E5F3912
+
+Transaction: https://etherscan.io/tx/0xe3c533f25eab8c961b39135b287a973f98e635d1fe283b4c615aa83e6377fa07
+
+### OurSongFToken 1155
+
+Contract Address: 0xa42bd534270dd4c934d970429392ce335c79220d
+
+Transaction: https://etherscan.io/tx/0x1031405530eb083698ccf73a4251602c82cc533b6aff64876163c75364084383
+
+### OurSongNFTokenFactory
+
+Contract Address: 0x1bd84320cCd43b968c4d545B4f9A39ac538Dcf11
+
+Transaction: https://etherscan.io/tx/0x5905bed0f7798fb170c90452f0074815e1c7b33dc810b4faad9c3b716464ef2a
+
+## Rinkeby
 ### OurAdmin
 
 Contract Address: 0x1942e46c4b69b9D0768608Fc599734884cf8cbA8
