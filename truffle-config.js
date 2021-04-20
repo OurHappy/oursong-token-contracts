@@ -93,6 +93,12 @@ module.exports = {
       },
       network_id: 4
     },
+    bscmain: {
+      provider: function() {
+        return new HDWalletProvider(mnemonic, `https://bsc-dataseed.binance.org/`)
+      },
+      network_id: 56
+    },
     bsctest: {
       provider: function() {
         return new HDWalletProvider(mnemonic, `https://data-seed-prebsc-1-s1.binance.org:8545/`)

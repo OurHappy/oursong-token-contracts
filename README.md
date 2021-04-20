@@ -92,3 +92,25 @@ Contract Address: 0x00055B7Ab2B89a53f01F8cFAE997CD4dAc6bc3a9
 
 Transaction: https://rinkeby.etherscan.io/tx/0x148eff198616892294a2b2f5872923198cad33620f85c4ef0ca59fe1d41e8cc4
 
+## BSC Test Net
+
+### OurAdmin
+
+Contract Address: 0xe795DF147D5a4EFBCcaa7c62265554282e4d4C22
+
+Transaction: https://testnet.bscscan.com/tx/0x8757f5ebb4e30788a0e2e063b3e6ecfc1d8a8c13ff1acaffeb837cf28ef72193
+
+WhiteList: 0xE1E8D20B7614Fb5E3Aa400485d88AF300cc5A165,0x8EB25A585cb0643A8c239c69FB1a5C3CE9665e7C
+
+### OurSongFToken 1155
+
+Contract Address: 0x74247aE0D95E5be00ED105aFe03Ad0a98f3aEd8F
+
+Transaction: https://testnet.bscscan.com/tx/0x01014a768258b19bde4e5d5650fde2584765dde1d94755aac1de74ee187eb1ec
+
+### OurSongNFTTokenFactory
+
+Contract Address: 0x47AC3b44eC854bC513Ff99fb8AAC7738fa52acD7
+
+Transaction: https://testnet.bscscan.com/tx/0x56eb5cc0bfea82e2af881d03c8ec7e3644887df0736b7a1bafe1a556e75287e9
+
