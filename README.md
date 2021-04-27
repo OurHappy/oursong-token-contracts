@@ -114,3 +114,23 @@ Contract Address: 0x47AC3b44eC854bC513Ff99fb8AAC7738fa52acD7
 
 Transaction: https://testnet.bscscan.com/tx/0x56eb5cc0bfea82e2af881d03c8ec7e3644887df0736b7a1bafe1a556e75287e9
 
+## BSC Main Net
+
+### OurAdmin
+
+Contract Address: 0x1942e46c4b69b9D0768608Fc599734884cf8cbA8
+
+Transaction: https://bscscan.com/tx/0xf102762fedc28870bed4856807a6a0969face95ff132d1d4803fde4fce34e153
+
+### OurSongFToken 1155
+
+Contract Address: 0xD41bDc346dfCC6A6acCC219eDC2055005F32B3A4
+
+Transaction: https://bscscan.com/tx/0xe34772d6d2de0e64e0989d90f83c155bfbd9dd1113e8ad5f70d286924d9f08c4
+
+### OurSongNFTTokenFactory
+
+Contract Address: 0xD8b2fEAb43421B512A167021B4e92A59BeA852E1
+
+Transaction: https://bscscan.com/tx/0xbb11796bbe12bcf61fe81ffe6a542ccd8397b1b2fe68cef531f238828a5b409a
+
