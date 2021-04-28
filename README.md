@@ -114,6 +114,12 @@ Contract Address: 0x47AC3b44eC854bC513Ff99fb8AAC7738fa52acD7
 
 Transaction: https://testnet.bscscan.com/tx/0x56eb5cc0bfea82e2af881d03c8ec7e3644887df0736b7a1bafe1a556e75287e9
 
+### Ourcoin
+
+Contract Address: 0xfaB1AC26cCF09E99092d8e9C5662899c8E5F3912
+
+Transaction: https://testnet.bscscan.com/tx/0x23c58d95a2acb0dbc83393c3db37daf5a322562b375744e8aa7af680db3559a1
+
 ## BSC Main Net
 
 ### OurAdmin
@@ -133,4 +139,10 @@ Transaction: https://bscscan.com/tx/0xe34772d6d2de0e64e0989d90f83c155bfbd9dd1113
 Contract Address: 0xD8b2fEAb43421B512A167021B4e92A59BeA852E1
 
 Transaction: https://bscscan.com/tx/0xbb11796bbe12bcf61fe81ffe6a542ccd8397b1b2fe68cef531f238828a5b409a
+
+### FukuCoin
+
+Contract Address: 0x05BEBd110071E936Eec13f550D88FcF1a3d1FF96
+
+Transaction: https://bscscan.com/tx/0x2f52d2875851392cffae584f89f53637d8165c2a40fb8abe53822f728ad42a73
 
