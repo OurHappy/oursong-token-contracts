@@ -2,7 +2,7 @@
 pragma solidity >=0.4.22 <0.9.0;
 
 import "./ERC1155.sol";
-import "@openzeppelin/contracts/GSN/Context.sol";
+import "../GSN/Context.sol";
 
 /**
  * @dev Extension of {ERC1155} that allows token holders to destroy both their

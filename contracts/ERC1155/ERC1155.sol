@@ -177,7 +177,7 @@ contract ERC1155 is ERC165, IERC1155
             "ERC1155: need operator approval for 3rd party transfers"
         );
 
-        _balances[id][from] = _balances[id][from].sub(value, "ERC1155: insufficient balance for transfer");
+        _balances[id][from] = _balances[id][from].sub(value);
         _balances[id][to] = _balances[id][to].add(value);
 
         emit TransferSingle(msg.sender, from, to, id, value);
@@ -216,10 +216,7 @@ contract ERC1155 is ERC165, IERC1155
             uint256 id = ids[i];
             uint256 value = values[i];
 
-            _balances[id][from] = _balances[id][from].sub(
-                value,
-                "ERC1155: insufficient balance of some token type for transfer"
-            );
+            _balances[id][from] = _balances[id][from].sub(value);
             _balances[id][to] = _balances[id][to].add(value);
         }
 
@@ -273,10 +270,7 @@ contract ERC1155 is ERC165, IERC1155
     function _burn(address account, uint256 id, uint256 value) internal {
         require(account != address(0), "ERC1155: attempting to burn tokens on zero account");
 
-        _balances[id][account] = _balances[id][account].sub(
-            value,
-            "ERC1155: attempting to burn more than balance"
-        );
+        _balances[id][account] = _balances[id][account].sub(value);
         emit TransferSingle(msg.sender, account, address(0), id, value);
     }
 
@@ -291,10 +285,7 @@ contract ERC1155 is ERC165, IERC1155
         require(ids.length == values.length, "ERC1155: burnt IDs and values must have same lengths");
 
         for(uint i = 0; i < ids.length; i++) {
-            _balances[ids[i]][account] = _balances[ids[i]][account].sub(
-                values[i],
-                "ERC1155: attempting to burn more than balance for some token"
-            );
+            _balances[ids[i]][account] = _balances[ids[i]][account].sub(values[i]);
         }
 
         emit TransferBatch(msg.sender, account, address(0), ids, values);

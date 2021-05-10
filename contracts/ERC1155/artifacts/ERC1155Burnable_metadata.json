@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.5.9+commit.c68bc34e"
+		"version": "0.5.4+commit.9549d8ff"
 	},
 	"language": "Solidity",
 	"output": {
@@ -392,7 +392,7 @@
 					}
 				},
 				"supportsInterface(bytes4)": {
-					"details": "See {IERC165-supportsInterface}.     * Time complexity O(1), guaranteed to always use less than 30 000 gas."
+					"details": "See `IERC165.supportsInterface`.     * Time complexity O(1), guaranteed to always use less than 30 000 gas."
 				},
 				"uri(uint256)": {
 					"details": "See {IERC1155MetadataURI-uri}.     * This implementation returns the same URI for *all* token types. It relies on the token type ID substitution mechanism https://eips.ethereum.org/EIPS/eip-1155#metadata[defined in the EIP].     * Clients calling this function must replace the `\\{id\\}` substring with the actual token type ID."
@@ -411,7 +411,7 @@
 		"compilationTarget": {
 			"contracts/ERC1155/ERC1155Burnable.sol": "ERC1155Burnable"
 		},
-		"evmVersion": "petersburg",
+		"evmVersion": "byzantium",
 		"libraries": {},
 		"optimizer": {
 			"enabled": false,
@@ -420,67 +420,58 @@
 		"remappings": []
 	},
 	"sources": {
-		"@openzeppelin/contracts/GSN/Context.sol": {
-			"keccak256": "0x90a3995645af7562d84b9d69363ffa5ae7217714ab61e951bf7bc450f40e4061",
-			"urls": [
-				"bzzr://51482c01bddf23793bddee43b60ab9578a62948a4f2082def24ea792a553b055",
-				"dweb:/ipfs/QmNPrJ4MWKUAWzKXpUqeyKRUfosaoANZAqXgvepdrCwZAG"
-			]
-		},
 		"@openzeppelin/contracts/introspection/ERC165.sol": {
-			"keccak256": "0x01aedbf24e121a744262e04c7815b2a4c8ce604dee4829c5cff00943a594ccf3",
+			"keccak256": "0xac2eacd7e7762e275442f28f21d821544df5aae2ed7698af13be8c41b7005e2e",
 			"urls": [
-				"bzzr://07dffd4225b87bb0aa8d02cfdb04640c2e02e59b35143accd0dd757775449c61",
-				"dweb:/ipfs/QmephAYF5hoymu9qCFK6mURM2kZJCxU4ntUb4KTf1miVPT"
+				"bzzr://43e901f6f210568ebc1d3591da3ce6a9d10796b854767a9c6e3da10305a8a332"
 			]
 		},
 		"@openzeppelin/contracts/introspection/IERC165.sol": {
-			"keccak256": "0xe0ed10f53955c35eecb02724538650a155aa940be3f0a54cd3bde6c6b0c6e48c",
+			"keccak256": "0x661553e43d7c4fbb2de504e5999fd5c104d367488350ed5bf023031bd1ba5ac5",
 			"urls": [
-				"bzzr://14f0ef90a240b2aca847fe1489b10965e04ba16cf221f52ed6470d0cad291f9d",
-				"dweb:/ipfs/QmXxx5rHfLL57zdgyyyG9MMv4XGN7bpVSc2MuDcaCgto6u"
+				"bzzr://fc2ba15143ce3a00268ecd15fc98eb2469b18bfe27a64bbab0ac6446f161c739"
 			]
 		},
 		"@openzeppelin/contracts/math/SafeMath.sol": {
-			"keccak256": "0x640b6dee7a4b830bdfd52b5031a07fc2b12209f5b2e29e5d364a7d37f69d8076",
+			"keccak256": "0xd1804d04fb39689453f673601429a99a0c68c422a981fc338773df9a59180fe9",
 			"urls": [
-				"bzzr://292843005e754e752644f767477ec5ad7a1ffc91ddb18c38b8079c62f3993cad",
-				"dweb:/ipfs/QmbZaJyXdpsYGykVhHH9qpVGQg9DGCxE2QufbCUy3daTgq"
+				"bzzr://a7dfb6fc259d0074da840a848461487567e2a6309105dd5c050a4e025f0fa7cb"
 			]
 		},
 		"@openzeppelin/contracts/utils/Address.sol": {
-			"keccak256": "0x1a8e5072509c5ea7365eb1d48030b9be865140c8fb779968da0a459a0e174a11",
+			"keccak256": "0xf3358e5819ca73357abd6c90bdfffd0474af54364897f6b3e3234c4b71fbe9a1",
 			"urls": [
-				"bzzr://4e1d23731da27602b8c552e54fb9976dadf8cf46a8f90a3c8c1b85fe044618b9",
-				"dweb:/ipfs/Qmebp4nzPja645c9yXSdJkGq96oU3am3LUnG2K3R7XxyKf"
+				"bzzr://f7f6da60a184233fd666ac44e6fb2bd51ca6ebdc4867a310d368049aa4e62786"
 			]
 		},
 		"contracts/ERC1155/ERC1155.sol": {
-			"keccak256": "0xc0f22c4774b2bf60e46b8b9731c3e3f4c686f19292a33b8338a07e0344dd792d",
+			"keccak256": "0x5832f8c9c5cf38b206e7baf0a0bd4a94a97a246aead9fb5025fd70ac709dca97",
 			"urls": [
-				"bzzr://5d3ebe4ddda4409ac000302e3e6a9fb679d6c4f7d27859ac0840d84201f5ddfc",
-				"dweb:/ipfs/QmYpHN9nRkGTRy36SPtEAGrrrq8YGADnmrUdGPrr4eoJVF"
+				"bzzr://26f0a40c919d0dc7fca256da7e0357672517a3475b9b3f85e28796929a547936"
 			]
 		},
 		"contracts/ERC1155/ERC1155Burnable.sol": {
-			"keccak256": "0x2b15645aa2270d49aed7c771759e63c2c25d5526320b8b9aec31280420f1f2d5",
+			"keccak256": "0xeb6269d85f64386acbac3fdb4c8d32c2dce6fc808da7d7d2ea5346e47ac2c0a9",
 			"urls": [
-				"bzzr://f79d907503812d81d8aa1a2c6320719669dc8c17acc5081eba098d86607bb189",
-				"dweb:/ipfs/QmXdRfezJPSNmvweFsVRquLUrSAXMuf96NbBzCSG7hxoVw"
+				"bzzr://91d91074ab72b9bcc5f320e23a034da1d9f426e1a5d5afef94c2f1489534d35e"
 			]
 		},
 		"contracts/ERC1155/IERC1155.sol": {
 			"keccak256": "0x62f7a4c6b32f3e6f980bc174b6615c8a2d088518b820914efb26bbd2f14f7608",
 			"urls": [
-				"bzzr://656f1e751d06f0be51f1297d6be1b53d9cd598a8e781159fc4340d9ce025fa82",
-				"dweb:/ipfs/QmPANSwtAzNqqcgCyn31GqDaQWsbFZhks89PamFRxuSRgB"
+				"bzzr://656f1e751d06f0be51f1297d6be1b53d9cd598a8e781159fc4340d9ce025fa82"
 			]
 		},
 		"contracts/ERC1155/IERC1155Receiver.sol": {
 			"keccak256": "0xf43bcc1f751c5abb0959c7981af57fcbeaabcf84668be9b1b96bc04972c2a3c0",
 			"urls": [
-				"bzzr://f766d4ac22d73150933e4f4c3cd17f4b1c418cd7482c0316486d0638e696f34a",
-				"dweb:/ipfs/QmRCNBoPzNu2frdFjYnfDVtKdEmFSxRggGNitfaSxWEW7p"
+				"bzzr://f766d4ac22d73150933e4f4c3cd17f4b1c418cd7482c0316486d0638e696f34a"
+			]
+		},
+		"contracts/GSN/Context.sol": {
+			"keccak256": "0x888f1fc2926f0ddca4f290ad95cd012baf1d1a934364fa6a5cb8b35e73e0778e",
+			"urls": [
+				"bzzr://aa47b98b9d693b12587209a5cc4f795293a0d5d79d36752f2d2ef6bcdacdf6ac"
 			]
 		}
 	},

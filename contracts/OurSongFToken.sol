@@ -2,7 +2,7 @@
 pragma solidity >=0.4.22 <0.9.0;
 
 import "@openzeppelin/contracts/ownership/Ownable.sol";
-import "@openzeppelin/contracts/GSN/Context.sol";
+import "./GSN/Context.sol";
 import "./ERC1155/ERC1155.sol";
 import "./ERC1155/ERC1155Burnable.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";

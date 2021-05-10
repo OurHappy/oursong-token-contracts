@@ -2,7 +2,7 @@
 pragma solidity >=0.4.22 <0.9.0;
 
 import "@openzeppelin/contracts/ownership/Ownable.sol";
-import "@openzeppelin/contracts/GSN/Context.sol";
+import "./GSN/Context.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721Metadata.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721Burnable.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
@@ -10,6 +10,7 @@ import "@openzeppelin/contracts/math/SafeMath.sol";
 contract OurSongNFToken is Context, Ownable, ERC721Metadata, ERC721Burnable {
   using SafeMath for uint256;
 
+  string private _baseURI;
   string private _contractURI;
 
   constructor(string memory name_, string memory symbol_, string memory baseURI_) ERC721Metadata(name_, symbol_) public {
@@ -23,6 +24,27 @@ contract OurSongNFToken is Context, Ownable, ERC721Metadata, ERC721Burnable {
 
   function setBaseURI(string memory baseURI_) public onlyOwner {
     _setBaseURI(baseURI_);
+  }
+
+  /**
+  * @dev Internal function to set the base URI for all token IDs. It is
+  * automatically added as a prefix to the value returned in {tokenURI}.
+  *
+  * _Available since v2.5.0._
+  */
+  function _setBaseURI(string memory baseURI) internal {
+    _baseURI = baseURI;
+  }
+
+  /**
+  * @dev Returns the base URI set via {_setBaseURI}. This will be
+  * automatically added as a preffix in {tokenURI} to each token's URI, when
+  * they are non-empty.
+  *
+  * _Available since v2.5.0._
+  */
+  function baseURI() external view returns (string memory) {
+    return _baseURI;
   }
 
   function setContractURI(string memory contractURI_) public onlyOwner {
