@@ -146,3 +146,11 @@ Contract Address: 0x05BEBd110071E936Eec13f550D88FcF1a3d1FF96
 
 Transaction: https://bscscan.com/tx/0x2f52d2875851392cffae584f89f53637d8165c2a40fb8abe53822f728ad42a73
 
+## ThunderCore Test Net
+
+### OurAdmin
+
+## OurSongFToken 1155
+
+### OurSongNFTTokenFactory
+
