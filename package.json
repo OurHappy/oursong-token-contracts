@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@openzeppelin/contracts": "^3.4.1",
+    "@openzeppelin/contracts": "^2.5.1",
     "@openzeppelin/test-helpers": "^0.5.10",
     "chai": "^4.3.3",
     "solidity-coverage": "^0.7.16",

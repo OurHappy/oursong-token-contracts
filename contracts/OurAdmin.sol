@@ -2,7 +2,7 @@
 pragma solidity >=0.4.22 <0.9.0;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721Holder.sol";
-import "@openzeppelin/contracts/token/ERC1155/ERC1155Holder.sol";
+import "./ERC1155/ERC1155Holder.sol";
 
 contract OurAdmin is ERC721Holder, ERC1155Holder {
 
@@ -35,13 +35,13 @@ contract OurAdmin is ERC721Holder, ERC1155Holder {
 
     function execute(
         address _destination,
-        bytes memory _data,
+        bytes calldata _data,
         uint256 _nonce) external onlyWhiteList returns (bool)
     {
         //require(!suspend);
         bytes32 hash = keccak256(abi.encodePacked(this, _destination, _nonce, _data));
         require(!executed[hash]);
-        (bool success, ) = _destination.call{value: 0}(_data);
+        (bool success, ) = _destination.call.value(0)(_data);
         if (success) {
             executed[hash] = true;
             emit Execution(hash);

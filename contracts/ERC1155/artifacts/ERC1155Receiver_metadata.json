@@ -1,0 +1,180 @@
+{
+	"compiler": {
+		"version": "0.5.9+commit.c68bc34e"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"name": "interfaceId",
+						"type": "bytes4"
+					}
+				],
+				"name": "supportsInterface",
+				"outputs": [
+					{
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"name": "ids",
+						"type": "uint256[]"
+					},
+					{
+						"name": "values",
+						"type": "uint256[]"
+					},
+					{
+						"name": "data",
+						"type": "bytes"
+					}
+				],
+				"name": "onERC1155BatchReceived",
+				"outputs": [
+					{
+						"name": "",
+						"type": "bytes4"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"name": "value",
+						"type": "uint256"
+					},
+					{
+						"name": "data",
+						"type": "bytes"
+					}
+				],
+				"name": "onERC1155Received",
+				"outputs": [
+					{
+						"name": "",
+						"type": "bytes4"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			}
+		],
+		"devdoc": {
+			"methods": {
+				"onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)": {
+					"details": "Handles the receipt of a multiple ERC1155 token types. This function is called at the end of a `safeBatchTransferFrom` after the balances have been updated. To accept the transfer(s), this must return `bytes4(keccak256(\"onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)\"))` (i.e. 0xbc197c81, or its own function selector).",
+					"params": {
+						"data": "Additional data with no specified format",
+						"from": "The address which previously owned the token",
+						"ids": "An array containing ids of each token being transferred (order and length must match values array)",
+						"operator": "The address which initiated the batch transfer (i.e. msg.sender)",
+						"values": "An array containing amounts of each token being transferred (order and length must match ids array)"
+					},
+					"return": "`bytes4(keccak256(\"onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)\"))` if transfer is allowed"
+				},
+				"onERC1155Received(address,address,uint256,uint256,bytes)": {
+					"details": "Handles the receipt of a single ERC1155 token type. This function is called at the end of a `safeTransferFrom` after the balance has been updated. To accept the transfer, this must return `bytes4(keccak256(\"onERC1155Received(address,address,uint256,uint256,bytes)\"))` (i.e. 0xf23a6e61, or its own function selector).",
+					"params": {
+						"data": "Additional data with no specified format",
+						"from": "The address which previously owned the token",
+						"id": "The ID of the token being transferred",
+						"operator": "The address which initiated the transfer (i.e. msg.sender)",
+						"value": "The amount of tokens being transferred"
+					},
+					"return": "`bytes4(keccak256(\"onERC1155Received(address,address,uint256,uint256,bytes)\"))` if transfer is allowed"
+				},
+				"supportsInterface(bytes4)": {
+					"details": "See {IERC165-supportsInterface}.     * Time complexity O(1), guaranteed to always use less than 30 000 gas."
+				}
+			}
+		},
+		"userdoc": {
+			"methods": {}
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/ERC1155/ERC1155Receiver.sol": "ERC1155Receiver"
+		},
+		"evmVersion": "petersburg",
+		"libraries": {},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/introspection/ERC165.sol": {
+			"keccak256": "0x01aedbf24e121a744262e04c7815b2a4c8ce604dee4829c5cff00943a594ccf3",
+			"urls": [
+				"bzzr://07dffd4225b87bb0aa8d02cfdb04640c2e02e59b35143accd0dd757775449c61",
+				"dweb:/ipfs/QmephAYF5hoymu9qCFK6mURM2kZJCxU4ntUb4KTf1miVPT"
+			]
+		},
+		"@openzeppelin/contracts/introspection/IERC165.sol": {
+			"keccak256": "0xe0ed10f53955c35eecb02724538650a155aa940be3f0a54cd3bde6c6b0c6e48c",
+			"urls": [
+				"bzzr://14f0ef90a240b2aca847fe1489b10965e04ba16cf221f52ed6470d0cad291f9d",
+				"dweb:/ipfs/QmXxx5rHfLL57zdgyyyG9MMv4XGN7bpVSc2MuDcaCgto6u"
+			]
+		},
+		"contracts/ERC1155/ERC1155Receiver.sol": {
+			"keccak256": "0x2c6b102e89adf9e409161b0d88e1b6dce85e89a19c77ce8a0cce29dc1583eb07",
+			"urls": [
+				"bzzr://95dc67d42bd0e7c692f1b68da6df094b0e607703772fb8ff2d2d4b961c578b94",
+				"dweb:/ipfs/QmdbnZ6MtTy14PAkYPtJ4pwnRuN8AFVbQbYok33DSY3QK9"
+			]
+		},
+		"contracts/ERC1155/IERC1155Receiver.sol": {
+			"keccak256": "0xf43bcc1f751c5abb0959c7981af57fcbeaabcf84668be9b1b96bc04972c2a3c0",
+			"urls": [
+				"bzzr://f766d4ac22d73150933e4f4c3cd17f4b1c418cd7482c0316486d0638e696f34a",
+				"dweb:/ipfs/QmRCNBoPzNu2frdFjYnfDVtKdEmFSxRggGNitfaSxWEW7p"
+			]
+		}
+	},
+	"version": 1
+}

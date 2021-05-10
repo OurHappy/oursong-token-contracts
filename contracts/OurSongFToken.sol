@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.22 <0.9.0;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/Context.sol";
-import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
-import "@openzeppelin/contracts/token/ERC1155/ERC1155Burnable.sol";
+import "@openzeppelin/contracts/ownership/Ownable.sol";
+import "@openzeppelin/contracts/GSN/Context.sol";
+import "./ERC1155/ERC1155.sol";
+import "./ERC1155/ERC1155Burnable.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 
-contract OurSongFToken is Context, Ownable, ERC1155Burnable {
+contract OurSongFToken is Context, Ownable, ERC1155, ERC1155Burnable {
   using SafeMath for uint256;
 
   string private _name;
@@ -15,7 +15,7 @@ contract OurSongFToken is Context, Ownable, ERC1155Burnable {
   string private _contractURI;
   mapping (uint256 => uint256) private _tokenSupply;
 
-  constructor(string memory uri_) public ERC1155(uri_) {
+  constructor(string memory uri_) public {
     _name = 'OURSONG NFT 1155';
     _symbol = 'OURNFT1155';
     _setURI(uri_);
@@ -25,7 +25,7 @@ contract OurSongFToken is Context, Ownable, ERC1155Burnable {
   /**
     * @dev Returns the name of the token.
     */
-  function name() public view virtual returns (string memory) {
+  function name() public view returns (string memory) {
     return _name;
   }
 
@@ -33,19 +33,19 @@ contract OurSongFToken is Context, Ownable, ERC1155Burnable {
     * @dev Returns the symbol of the token, usually a shorter version of the
     * name.
     */
-  function symbol() public view virtual returns (string memory) {
+  function symbol() public view returns (string memory) {
     return _symbol;
   }
 
-  function setURI(string memory uri_) public virtual onlyOwner {
+  function setURI(string memory uri_) public onlyOwner {
     _setURI(uri_);
   }
 
-  function contractURI() public view virtual returns (string memory) {
+  function contractURI() public view returns (string memory) {
     return _contractURI;
   }
 
-  function setContractURI(string memory contractURI_) public virtual onlyOwner {
+  function setContractURI(string memory contractURI_) public onlyOwner {
     _contractURI = contractURI_;
   }
 
@@ -69,7 +69,7 @@ contract OurSongFToken is Context, Ownable, ERC1155Burnable {
     *
     * - the caller must have the `MINTER_ROLE`.
     */
-  function mint(address to, uint256 id, uint256 amount, bytes memory data) public virtual onlyOwner {
+  function mint(address to, uint256 id, uint256 amount, bytes memory data) public onlyOwner {
     _mint(to, id, amount, data);
     _tokenSupply[id] = _tokenSupply[id].add(amount);
   }

@@ -1,31 +1,26 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.22 <0.9.0;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/Context.sol";
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/ownership/Ownable.sol";
+import "@openzeppelin/contracts/GSN/Context.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721Metadata.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721Burnable.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 
-contract OurSongNFToken is Context, Ownable, ERC721Burnable {
+contract OurSongNFToken is Context, Ownable, ERC721Metadata, ERC721Burnable {
   using SafeMath for uint256;
 
   string private _contractURI;
 
-  constructor(string memory name_, string memory symbol_, string memory baseURI_) public ERC721(name_, symbol_) {
-    _setBaseURI(baseURI_);
+  constructor(string memory name_, string memory symbol_, string memory baseURI_) ERC721Metadata(name_, symbol_) public {
     setContractURI(baseURI_);
   }
 
-  function setBaseURI(string memory baseURI_) public virtual onlyOwner {
-    _setBaseURI(baseURI_);
-  }
-
-  function contractURI() public view virtual returns (string memory) {
+  function contractURI() public view returns (string memory) {
     return _contractURI;
   }
 
-  function setContractURI(string memory contractURI_) public virtual onlyOwner {
+  function setContractURI(string memory contractURI_) public onlyOwner {
     _contractURI = contractURI_;
   }
 
@@ -40,7 +35,7 @@ contract OurSongNFToken is Context, Ownable, ERC721Burnable {
     *
     * - the caller must have the `MINTER_ROLE`.
     */
-  function mint(address to_, uint256 tokenId_) public virtual onlyOwner {
+  function mint(address to_, uint256 tokenId_) public onlyOwner {
     _mint(to_, tokenId_);
   }
 }

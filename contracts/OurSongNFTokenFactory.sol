@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.22 <0.9.0;
 
-import "@openzeppelin/contracts/utils/Context.sol";
+import "@openzeppelin/contracts/GSN/Context.sol";
 import "./OurSongNFToken.sol";
 
 contract OurSongNFTokenFactory is Context {
@@ -15,10 +15,10 @@ contract OurSongNFTokenFactory is Context {
     }
 
     function createOurSongNFToken(
-        string memory name_,
-        string memory symbol_,
-        string memory baseURI_,
-        string memory contractURI_
+        string calldata name_,
+        string calldata symbol_,
+        string calldata baseURI_,
+        string calldata contractURI_
     )
         external
         returns(address)
@@ -31,7 +31,7 @@ contract OurSongNFTokenFactory is Context {
         return newTokenContractAddress;
     }
 
-    function ourAdmin() public view virtual returns (address) {
+    function ourAdmin() public view returns (address) {
         return _ourAdminAddress;
     }
 }

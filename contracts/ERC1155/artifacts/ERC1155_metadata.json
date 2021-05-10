@@ -1,0 +1,437 @@
+{
+	"compiler": {
+		"version": "0.5.9+commit.c68bc34e"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "balanceOf",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"name": "interfaceId",
+						"type": "bytes4"
+					}
+				],
+				"name": "supportsInterface",
+				"outputs": [
+					{
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "uri",
+				"outputs": [
+					{
+						"name": "",
+						"type": "string"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"name": "ids",
+						"type": "uint256[]"
+					},
+					{
+						"name": "values",
+						"type": "uint256[]"
+					},
+					{
+						"name": "data",
+						"type": "bytes"
+					}
+				],
+				"name": "safeBatchTransferFrom",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"name": "accounts",
+						"type": "address[]"
+					},
+					{
+						"name": "ids",
+						"type": "uint256[]"
+					}
+				],
+				"name": "balanceOfBatch",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"name": "approved",
+						"type": "bool"
+					}
+				],
+				"name": "setApprovalForAll",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"name": "operator",
+						"type": "address"
+					}
+				],
+				"name": "isApprovedForAll",
+				"outputs": [
+					{
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"name": "value",
+						"type": "uint256"
+					},
+					{
+						"name": "data",
+						"type": "bytes"
+					}
+				],
+				"name": "safeTransferFrom",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "TransferSingle",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"name": "ids",
+						"type": "uint256[]"
+					},
+					{
+						"indexed": false,
+						"name": "values",
+						"type": "uint256[]"
+					}
+				],
+				"name": "TransferBatch",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"name": "approved",
+						"type": "bool"
+					}
+				],
+				"name": "ApprovalForAll",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"name": "value",
+						"type": "string"
+					},
+					{
+						"indexed": true,
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "URI",
+				"type": "event"
+			}
+		],
+		"devdoc": {
+			"details": "Implementation of the basic standard multi-token. See https://eips.ethereum.org/EIPS/eip-1155 Originally based on code by Enjin: https://github.com/enjin/erc-1155",
+			"methods": {
+				"balanceOf(address,uint256)": {
+					"details": "Get the specified address' balance for token with specified ID. Attempting to query the zero account for a balance will result in a revert.",
+					"params": {
+						"account": "The address of the token holder",
+						"id": "ID of the token"
+					},
+					"return": "The account's balance of the token type requested"
+				},
+				"balanceOfBatch(address[],uint256[])": {
+					"details": "Get the balance of multiple account/token pairs. If any of the query accounts is the zero account, this query will revert.",
+					"params": {
+						"accounts": "The addresses of the token holders",
+						"ids": "IDs of the tokens"
+					},
+					"return": "Balances for each account and token id pair"
+				},
+				"isApprovedForAll(address,address)": {
+					"params": {
+						"account": "The account of the Tokens",
+						"operator": "Address of authorized operator"
+					},
+					"return": "True if the operator is approved, false if not"
+				},
+				"safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)": {
+					"details": "Transfers `values` amount(s) of `ids` from the `from` address to the `to` address specified. Caller must be approved to manage the tokens being transferred out of the `from` account. If `to` is a smart contract, will call `onERC1155BatchReceived` on `to` and act appropriately.",
+					"params": {
+						"data": "Data forwarded to `onERC1155Received` if `to` is a contract receiver",
+						"from": "Source address",
+						"ids": "IDs of each token type",
+						"to": "Target address",
+						"values": "Transfer amounts per token type"
+					}
+				},
+				"safeTransferFrom(address,address,uint256,uint256,bytes)": {
+					"details": "Transfers `value` amount of an `id` from the `from` address to the `to` address specified. Caller must be approved to manage the tokens being transferred out of the `from` account. If `to` is a smart contract, will call `onERC1155Received` on `to` and act appropriately.",
+					"params": {
+						"data": "Data forwarded to `onERC1155Received` if `to` is a contract receiver",
+						"from": "Source address",
+						"id": "ID of the token type",
+						"to": "Target address",
+						"value": "Transfer amount"
+					}
+				},
+				"setApprovalForAll(address,bool)": {
+					"details": "Sets or unsets the approval of a given operator.     * An operator is allowed to transfer all tokens of the sender on their behalf.     * Because an account already has operator privileges for itself, this function will revert if the account attempts to set the approval status for itself.",
+					"params": {
+						"approved": "representing the status of the approval to be set",
+						"operator": "address to set the approval"
+					}
+				},
+				"supportsInterface(bytes4)": {
+					"details": "See {IERC165-supportsInterface}.     * Time complexity O(1), guaranteed to always use less than 30 000 gas."
+				},
+				"uri(uint256)": {
+					"details": "See {IERC1155MetadataURI-uri}.     * This implementation returns the same URI for *all* token types. It relies on the token type ID substitution mechanism https://eips.ethereum.org/EIPS/eip-1155#metadata[defined in the EIP].     * Clients calling this function must replace the `\\{id\\}` substring with the actual token type ID."
+				}
+			},
+			"title": "Standard ERC1155 token"
+		},
+		"userdoc": {
+			"methods": {
+				"isApprovedForAll(address,address)": {
+					"notice": "Queries the approval status of an operator for a given account."
+				}
+			}
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/ERC1155/ERC1155.sol": "ERC1155"
+		},
+		"evmVersion": "petersburg",
+		"libraries": {},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/introspection/ERC165.sol": {
+			"keccak256": "0x01aedbf24e121a744262e04c7815b2a4c8ce604dee4829c5cff00943a594ccf3",
+			"urls": [
+				"bzzr://07dffd4225b87bb0aa8d02cfdb04640c2e02e59b35143accd0dd757775449c61",
+				"dweb:/ipfs/QmephAYF5hoymu9qCFK6mURM2kZJCxU4ntUb4KTf1miVPT"
+			]
+		},
+		"@openzeppelin/contracts/introspection/IERC165.sol": {
+			"keccak256": "0xe0ed10f53955c35eecb02724538650a155aa940be3f0a54cd3bde6c6b0c6e48c",
+			"urls": [
+				"bzzr://14f0ef90a240b2aca847fe1489b10965e04ba16cf221f52ed6470d0cad291f9d",
+				"dweb:/ipfs/QmXxx5rHfLL57zdgyyyG9MMv4XGN7bpVSc2MuDcaCgto6u"
+			]
+		},
+		"@openzeppelin/contracts/math/SafeMath.sol": {
+			"keccak256": "0x640b6dee7a4b830bdfd52b5031a07fc2b12209f5b2e29e5d364a7d37f69d8076",
+			"urls": [
+				"bzzr://292843005e754e752644f767477ec5ad7a1ffc91ddb18c38b8079c62f3993cad",
+				"dweb:/ipfs/QmbZaJyXdpsYGykVhHH9qpVGQg9DGCxE2QufbCUy3daTgq"
+			]
+		},
+		"@openzeppelin/contracts/utils/Address.sol": {
+			"keccak256": "0x1a8e5072509c5ea7365eb1d48030b9be865140c8fb779968da0a459a0e174a11",
+			"urls": [
+				"bzzr://4e1d23731da27602b8c552e54fb9976dadf8cf46a8f90a3c8c1b85fe044618b9",
+				"dweb:/ipfs/Qmebp4nzPja645c9yXSdJkGq96oU3am3LUnG2K3R7XxyKf"
+			]
+		},
+		"contracts/ERC1155/ERC1155.sol": {
+			"keccak256": "0xc0f22c4774b2bf60e46b8b9731c3e3f4c686f19292a33b8338a07e0344dd792d",
+			"urls": [
+				"bzzr://5d3ebe4ddda4409ac000302e3e6a9fb679d6c4f7d27859ac0840d84201f5ddfc",
+				"dweb:/ipfs/QmYpHN9nRkGTRy36SPtEAGrrrq8YGADnmrUdGPrr4eoJVF"
+			]
+		},
+		"contracts/ERC1155/IERC1155.sol": {
+			"keccak256": "0x62f7a4c6b32f3e6f980bc174b6615c8a2d088518b820914efb26bbd2f14f7608",
+			"urls": [
+				"bzzr://656f1e751d06f0be51f1297d6be1b53d9cd598a8e781159fc4340d9ce025fa82",
+				"dweb:/ipfs/QmPANSwtAzNqqcgCyn31GqDaQWsbFZhks89PamFRxuSRgB"
+			]
+		},
+		"contracts/ERC1155/IERC1155Receiver.sol": {
+			"keccak256": "0xf43bcc1f751c5abb0959c7981af57fcbeaabcf84668be9b1b96bc04972c2a3c0",
+			"urls": [
+				"bzzr://f766d4ac22d73150933e4f4c3cd17f4b1c418cd7482c0316486d0638e696f34a",
+				"dweb:/ipfs/QmRCNBoPzNu2frdFjYnfDVtKdEmFSxRggGNitfaSxWEW7p"
+			]
+		}
+	},
+	"version": 1
+}
