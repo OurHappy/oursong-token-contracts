@@ -36,6 +36,7 @@ contract('OurAdmin', function (accounts) {
 
     const TOKEN_NAME = 'OurCoin';
     const TOKEN_SYMBOL = 'OUR';
+    const TOKEN_DECIMAL = new BN(18);
     const INITIAL_SUPPLY = new BN(42000000);
     const TRANSFER_AMOUNT = new BN(123);
 
@@ -43,7 +44,7 @@ contract('OurAdmin', function (accounts) {
         this.ourAdmin = await OurAdmin.new({ from: initialHolder });
         await this.ourAdmin.setWhiteList(initialHolder, 1);
 
-        this.token = await OurCoin.new(TOKEN_NAME, TOKEN_SYMBOL, INITIAL_SUPPLY, { from: initialHolder });
+        this.token = await OurCoin.new(TOKEN_NAME, TOKEN_SYMBOL, TOKEN_DECIMAL, INITIAL_SUPPLY, { from: initialHolder });
         await this.token.transfer(this.ourAdmin.address, INITIAL_SUPPLY, { from: initialHolder });
     });
 

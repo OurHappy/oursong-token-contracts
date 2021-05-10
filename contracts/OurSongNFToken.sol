@@ -13,11 +13,16 @@ contract OurSongNFToken is Context, Ownable, ERC721Metadata, ERC721Burnable {
   string private _contractURI;
 
   constructor(string memory name_, string memory symbol_, string memory baseURI_) ERC721Metadata(name_, symbol_) public {
+    _setBaseURI(baseURI_);
     setContractURI(baseURI_);
   }
 
   function contractURI() public view returns (string memory) {
     return _contractURI;
+  }
+
+  function setBaseURI(string memory baseURI_) public onlyOwner {
+    _setBaseURI(baseURI_);
   }
 
   function setContractURI(string memory contractURI_) public onlyOwner {

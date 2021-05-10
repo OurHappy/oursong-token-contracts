@@ -230,7 +230,7 @@ contract('OurSongFToken', function (accounts) {
 
             await expectRevert(
                 this.fToken.safeTransferFrom(recipient, initialHolder, 1, 3, '0x', { from: initialHolder }),
-                'ERC1155: caller is not owner nor approved'
+                'ERC1155: need operator approval for 3rd party transfers -- Reason given: ERC1155: need operator approval for 3rd party transfers.'
             );
 
             await this.fToken.safeTransferFrom(recipient, initialHolder, 1, 3, '0x', { from: recipient });

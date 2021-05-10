@@ -17,7 +17,7 @@ contract('OurCoin', function (accounts) {
     const PAUSER_ROLE = web3.utils.keccak256("PAUSER_ROLE");
 
     beforeEach(async function () {
-        this.token = await OurCoin.new(TOKEN_NAME, TOKEN_SYMBOL, INITIAL_SUPPLY);
+        this.token = await OurCoin.new(TOKEN_NAME, TOKEN_SYMBOL, TOKEN_DECIMAL, INITIAL_SUPPLY);
     });
 
     describe('should met initial settings', async () => {
