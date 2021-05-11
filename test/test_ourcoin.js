@@ -76,7 +76,7 @@ contract('OurCoin', function (accounts) {
 
             await expectRevert(
               this.token.burn(BURN_AMOUNT, { from: anotherAccount }),
-              'ERC20: burn amount exceeds balance',
+              'SafeMath: subtraction overflow -- Reason given: SafeMath: subtraction overflow.',
             );
 
             expect(await this.token.totalSupply()).to.be.bignumber.equal(INITIAL_SUPPLY.sub(BURN_AMOUNT));

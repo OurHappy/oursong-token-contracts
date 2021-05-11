@@ -51,14 +51,14 @@ contract('OurAdmin', function (accounts) {
     it('can excute by white listed admin', async function () {
         expect(await this.token.balanceOf(this.ourAdmin.address)).to.be.bignumber.equal(INITIAL_SUPPLY);
 
-        let transferCallData = web3.eth.abi.encodeFunctionCall(transferABI, [recipient, TRANSFER_AMOUNT]);
+        let transferCallData = web3.eth.abi.encodeFunctionCall(transferABI, [recipient, String(TRANSFER_AMOUNT)]);
         receipt = await this.ourAdmin.execute(this.token.address, transferCallData, 1, { from: initialHolder });
         expectEvent(receipt, 'Execution');
 
-        transferCallData = web3.eth.abi.encodeFunctionCall(transferABI, [recipient, TRANSFER_AMOUNT]);
+        transferCallData = web3.eth.abi.encodeFunctionCall(transferABI, [recipient, String(TRANSFER_AMOUNT)]);
         await tryCatch(this.ourAdmin.execute(this.token.address, transferCallData, 1, { from: initialHolder }), errTypes.revert);
 
-        transferCallData = web3.eth.abi.encodeFunctionCall(transferABI, [anotherAccount, TRANSFER_AMOUNT]);
+        transferCallData = web3.eth.abi.encodeFunctionCall(transferABI, [anotherAccount, String(TRANSFER_AMOUNT)]);
         await tryCatch(this.ourAdmin.execute(this.token.address, transferCallData, 2, { from: recipient }), errTypes.revert);
 
         expect(await this.token.balanceOf(this.ourAdmin.address)).to.be.bignumber.equal(INITIAL_SUPPLY.sub(TRANSFER_AMOUNT));
