@@ -166,3 +166,25 @@ Contract Address: 0x47AC3b44eC854bC513Ff99fb8AAC7738fa52acD7
 
 Transaction: https://scan-testnet.thundercore.com/transactions/0xde1b60362ac52f3e1e459d15ed0a47f17223442ad12885899f4a31a21eec8ce5
 
+## ThunderCore Main Net
+
+### OurAdmin
+
+Contract Address: 0xA39E0b216902688BEc7C7e68d62a6C9c60E31Bfb
+
+Transaction: https://scan.thundercore.com/transactions/0x1732a942fcf1d348e6a431745098b2b29180a782f2f6beffab92ebeeea1da01a
+
+### OurSongFToken 1155
+
+Contract Address: 0x47AC3b44eC854bC513Ff99fb8AAC7738fa52acD7
+
+Transaction: https://scan.thundercore.com/transactions/0x04e3ebbc1ba836b3610ffb27e32318379729f94e068100dbe4a107404f301dba
+
+### OurSongNFTTokenFactory
+
+Contract Address: 0xfaB1AC26cCF09E99092d8e9C5662899c8E5F3912
+
+Transaction: https://scan.thundercore.com/transactions/0xeee02a3ba2cb74da4c85d098833fc368b09e3aad1d9a6ed46c857aaa97f5dc37
+
+
+
