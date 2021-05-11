@@ -150,7 +150,19 @@ Transaction: https://bscscan.com/tx/0x2f52d2875851392cffae584f89f53637d8165c2a40
 
 ### OurAdmin
 
+Contract Address: 0xe795DF147D5a4EFBCcaa7c62265554282e4d4C22
+
+Transaction: https://scan-testnet.thundercore.com/transactions/0x240d7f310a0843d6b6f2c09e56392a0fd6e8a0a031a3efb2b4dc879068fcaed9
+
 ## OurSongFToken 1155
 
+Contract Address: 0x74247aE0D95E5be00ED105aFe03Ad0a98f3aEd8F
+
+Transaction: https://scan-testnet.thundercore.com/transactions/0xe334e0cf558f94898c8ffb8f4e3fb297f76e72189f1dd2e6ad18ec8115451587
+
 ### OurSongNFTTokenFactory
+
+Contract Address: 0x47AC3b44eC854bC513Ff99fb8AAC7738fa52acD7
+
+Transaction: https://scan-testnet.thundercore.com/transactions/0xde1b60362ac52f3e1e459d15ed0a47f17223442ad12885899f4a31a21eec8ce5
 
