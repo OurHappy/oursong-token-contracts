@@ -5,7 +5,7 @@ OurSong Token Contracts
 ## Install
 
 ```
-nvm use v14.15.3
+nvm use v14.15.3 // thundercore v10.24.0
 
 npm install
 ```
@@ -13,31 +13,31 @@ npm install
 ## Compile
 
 ```
-npx truffle compile
+npx truffle compile // thundercore truffle compile
 ```
 
 ## Migrate
 
 ```
-npx truffle migrate
+npx truffle migrate // thundercore truffle migrate
 ```
 
 ## Play with migrated contract
 
 ```
-npx truffle console
+npx truffle console // thundercore truffle console
 ```
 
 ## Test
 
 ```
-npx truffle test
+npx truffle test // thundercore truffle test
 ```
 
 ## Coverage
 
 ```
-npx truffle run coverage
+npx truffle run coverage // thundercore truffle run coverage
 ```
 
 ## Verify on Etherscan

@@ -3,12 +3,14 @@ pragma solidity >=0.4.22 <0.9.0;
 
 import "@openzeppelin/contracts/ownership/Ownable.sol";
 import "./GSN/Context.sol";
+import "./utils/Strings.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721Metadata.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721Burnable.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 
 contract OurSongNFToken is Context, Ownable, ERC721Metadata, ERC721Burnable {
   using SafeMath for uint256;
+  using Strings for uint256;
 
   string private _baseURI;
   string private _contractURI;
@@ -49,6 +51,10 @@ contract OurSongNFToken is Context, Ownable, ERC721Metadata, ERC721Burnable {
 
   function setContractURI(string memory contractURI_) public onlyOwner {
     _contractURI = contractURI_;
+  }
+
+  function tokenURI(uint256 tokenId) external view returns (string memory) {
+    return string(abi.encodePacked(_baseURI, tokenId.toString()));
   }
 
   /**

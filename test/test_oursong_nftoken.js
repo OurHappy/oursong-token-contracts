@@ -205,6 +205,8 @@ contract('OurSongNFToken', function (accounts) {
             expectEvent(receipt, 'ExecutionFailure');
 
             expect(await this.nfToken.balanceOf(this.ourAdmin.address)).to.be.bignumber.equal(new BN(2));
+
+            expect(await this.nfToken.tokenURI(1)).to.equal(INITIAL_BASE_URI+'1');
         });
 
         it('can not mint by not admin through admin contract', async function () {
