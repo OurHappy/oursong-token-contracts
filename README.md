@@ -166,6 +166,13 @@ Contract Address: 0x47AC3b44eC854bC513Ff99fb8AAC7738fa52acD7
 
 Transaction: https://scan-testnet.thundercore.com/transactions/0xde1b60362ac52f3e1e459d15ed0a47f17223442ad12885899f4a31a21eec8ce5
 
+New
+
+Contract Address:
+0x1f27b4AB1693eDc42219B12ef522C6b92C6F2708
+
+Transaction: https://scan-testnet.thundercore.com/transactions/0xff1e9eaca783b3696173492deb9aec070f8a6caeaeef58fbe0f60bbd3eb851be
+
 ## ThunderCore Main Net
 
 ### OurAdmin
@@ -185,6 +192,12 @@ Transaction: https://scan.thundercore.com/transactions/0x04e3ebbc1ba836b3610ffb2
 Contract Address: 0xfaB1AC26cCF09E99092d8e9C5662899c8E5F3912
 
 Transaction: https://scan.thundercore.com/transactions/0xeee02a3ba2cb74da4c85d098833fc368b09e3aad1d9a6ed46c857aaa97f5dc37
+
+New
+
+Contract Address: 0x1f27b4AB1693eDc42219B12ef522C6b92C6F2708
+
+Transaction: https://scan.thundercore.com/transactions/0xc34f69a89388d2dc1b2c0f9e7c16278de84866e947fbb93f00d9b3ceb3bd4f40
 
 
 
