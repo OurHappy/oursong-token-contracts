@@ -24,7 +24,7 @@
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 
-const { infuraProjectId, mnemonic, etherscanApiKey, bscscanApiKey } = require('./secrets.json');
+const { infuraProjectId, mnemonic, etherscanApiKey, bscscanApiKey, polygonscanApiKey } = require('./secrets.json');
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 
 module.exports = {
@@ -105,6 +105,18 @@ module.exports = {
       },
       network_id: 97
     },
+    polygonmain: {
+      provider: function() {
+        return new HDWalletProvider(mnemonic, `https://polygon-rpc.com/`)
+      },
+      network_id: 137
+    },
+    polygontest: {
+      provider: function() {
+        return new HDWalletProvider(mnemonic, `https://rpc-mumbai.matic.today`)
+      },
+      network_id: 80001
+    },
     development: {
       host: "localhost",
       port: 8545,
@@ -150,5 +162,6 @@ module.exports = {
   api_keys: {
     etherscan: etherscanApiKey,
     bscscan: bscscanApiKey,
+    polygonscan: polygonscanApiKey,
   }
 };
