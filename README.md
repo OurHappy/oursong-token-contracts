@@ -195,6 +195,26 @@ Contract Address: 0x0f8532c40eE2DAF0939D5AddFF760A3B1d3d1aeA
 
 Transaction: https://mumbai.polygonscan.com/tx/0xdc7657d9e183b9d17e7895a3f3c28e4b84d6053137c99283fff568e8e1ab8761
 
+## Polygon Main Net
+
+### OurAdmin
+
+Contract Address: 0x1942e46c4b69b9d0768608fc599734884cf8cba8
+
+Transaction: https://polygonscan.com/tx/0x90e648aac2e980b78e9800a35425691e4a35918cf9b16466db8ccb3bfe09e307
+
+### OurSongFToken 1155
+
+Contract Address: 0x74247aE0D95E5be00ED105aFe03Ad0a98f3aEd8F
+
+Transaction: https://polygonscan.com/tx/0x0c340a27ebeb5da622fbb53a7248bfff980e5611601c50e8b626668b414c1d8b
+
+### OurSongNFTTokenFactory
+
+Contract Address: 0x47AC3b44eC854bC513Ff99fb8AAC7738fa52acD7
+
+Transaction: https://polygonscan.com/tx/0xe9bb671530e7780fcd79f8c8bdd9b719fdadabe1fcf391d0cf32a5fc076010fe
+
 ## Ourcoin
 
 ## Ropsten Test Net
