@@ -86,7 +86,7 @@ Contract Address: 0x7FA783fFaB81D23b66B4B4c25d2bF853989a34eb
 
 Transaction: https://rinkeby.etherscan.io/tx/0x79615e098ade007891b4667f007790f6998ebdd6900a498b489037781e8137f5
 
-### OurSongNFTTokenFactory
+### OurSongNFTokenFactory
 
 Contract Address: 0x00055B7Ab2B89a53f01F8cFAE997CD4dAc6bc3a9
 
@@ -110,7 +110,7 @@ Transaction: https://testnet.bscscan.com/tx/0x01014a768258b19bde4e5d5650fde25847
 
 ## BSC Main Net
 
-### OurSongNFTTokenFactory
+### OurSongNFTokenFactory
 
 Contract Address: 0x47AC3b44eC854bC513Ff99fb8AAC7738fa52acD7
 
@@ -128,7 +128,7 @@ Contract Address: 0xD41bDc346dfCC6A6acCC219eDC2055005F32B3A4
 
 Transaction: https://bscscan.com/tx/0xe34772d6d2de0e64e0989d90f83c155bfbd9dd1113e8ad5f70d286924d9f08c4
 
-### OurSongNFTTokenFactory
+### OurSongNFTokenFactory
 
 Contract Address: 0xD8b2fEAb43421B512A167021B4e92A59BeA852E1
 
@@ -148,7 +148,7 @@ Contract Address: 0x74247aE0D95E5be00ED105aFe03Ad0a98f3aEd8F
 
 Transaction: https://scan-testnet.thundercore.com/transactions/0xe334e0cf558f94898c8ffb8f4e3fb297f76e72189f1dd2e6ad18ec8115451587
 
-### OurSongNFTTokenFactory
+### OurSongNFTokenFactory
 
 Contract Address: 0x47AC3b44eC854bC513Ff99fb8AAC7738fa52acD7
 
@@ -168,7 +168,7 @@ Contract Address: 0x47AC3b44eC854bC513Ff99fb8AAC7738fa52acD7
 
 Transaction: https://scan.thundercore.com/transactions/0x04e3ebbc1ba836b3610ffb27e32318379729f94e068100dbe4a107404f301dba
 
-### OurSongNFTTokenFactory
+### OurSongNFTokenFactory
 
 Contract Address: 0xfaB1AC26cCF09E99092d8e9C5662899c8E5F3912
 
@@ -189,7 +189,7 @@ Contract Address: 0x74247aE0D95E5be00ED105aFe03Ad0a98f3aEd8F
 
 Transaction: https://mumbai.polygonscan.com/tx/0x9af508178821dbd9b1f8394e0d28c04e7acf039f81cd3a82e73214a8bbabd175
 
-### OurSongNFTTokenFactory
+### OurSongNFTokenFactory
 
 Contract Address: 0x0f8532c40eE2DAF0939D5AddFF760A3B1d3d1aeA
 
@@ -209,7 +209,7 @@ Contract Address: 0x74247aE0D95E5be00ED105aFe03Ad0a98f3aEd8F
 
 Transaction: https://polygonscan.com/tx/0x0c340a27ebeb5da622fbb53a7248bfff980e5611601c50e8b626668b414c1d8b
 
-### OurSongNFTTokenFactory
+### OurSongNFTokenFactory
 
 Contract Address: 0x47AC3b44eC854bC513Ff99fb8AAC7738fa52acD7
 
